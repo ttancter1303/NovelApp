@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/historyFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.example.comicapp.ComicFragment.ComicFragment"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_comic">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.example.comicapp.HistoryFragment.ComicDetailFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_comic_detail">
+
+    </fragment>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.comicapp.UserFragment.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" >
+        <action
+            android:id="@+id/action_userFragment_to_changeProfileFragment"
+            app:destination="@id/changeProfileFragment" />
+        <action
+            android:id="@+id/action_userFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeProfileFragment"
+        android:name="com.example.comicapp.UserFragment.ChangeProfileFragment"
+        android:label="fragment_change_profile"
+        tools:layout="@layout/fragment_change_profile" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.comicapp.UserFragment.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.comicapp.HistoryFragment.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.comicapp.HomeFragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.comicapp.NotificationFragment.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+
+</navigation>

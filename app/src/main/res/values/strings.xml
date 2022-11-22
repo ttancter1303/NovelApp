@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">App wibu</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="gioi_thieu">Trên đường tới trường, Kashiwagi Aki bị bắt cóc và tỉnh dậy ở một thế giới nơi thú nhân làm chủ thay loài người. Một người sói tên Zinovy – tính tình bốc đồng và thừa năng lượng đã mê tít cô và đã mua cô về từ tiệm thú cưng. Khởi đầu câu chuyện của họ có chút kì lạ và lộn xộn, nhưng cuộc sống của họ sau này lại trở nên cực kỳ đáng yêu.</string>
+    <string name="detail">Mấy ông bảo mái bằng thì chắc chưa biết cái nóng miền trung mà nó rọi vào bê tông nó như nào rồi. Nhà các ông giữa trưa hè tháng</string>
+    <string name="ComicName">Diệt slime suốt 300 năm tôi lv max lúc nào không hay</string>
+    <string name="title_activity_comic_detail">ComicDetailActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>

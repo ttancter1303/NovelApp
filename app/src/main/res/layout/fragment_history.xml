@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HistoryFragment.HistoryFragment"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="336dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Tủ Truyện"
+            android:textSize="35sp" />
+
+        <ImageView
+            android:id="@+id/btn_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/setting"
+            android:layout_gravity="right"/>
+
+
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabHistory"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerHistory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></androidx.viewpager2.widget.ViewPager2>
+
+</LinearLayout>

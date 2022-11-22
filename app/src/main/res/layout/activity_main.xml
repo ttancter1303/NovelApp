@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:padding="15dp"
+    >
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_host_container"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottomNav"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
+<!--    <androidx.viewpager2.widget.ViewPager2-->
+<!--        android:id="@+id/viewPager2Home"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
+
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tabHome"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:contentDescription="@string/app_name"-->
+<!--        />-->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/menu_bottom_navigation"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

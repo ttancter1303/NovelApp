@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserFragment.UserFragment"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hồ sơ"
+        android:textSize="25sp"/>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:layout_gravity="center"
+        android:background="@drawable/slime300" />
+    <TextView
+        android:id="@+id/txt_change_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sửa hồ sơ"
+        style="@style/user_text_option"/>
+    <TextView
+        android:id="@+id/txt_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/user_text_option"
+        android:text="Cài đặt"/>
+    <TextView
+        android:id="@+id/txt_change_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đổi mật khẩu" />
+    <TextView
+        android:id="@+id/txt_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/user_text_option"
+        android:text="Đăng xuất"/>
+
+
+
+
+</LinearLayout>
