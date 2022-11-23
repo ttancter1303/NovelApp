@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "491552895352",
+    "project_id": "appnovel-b9cd4",
+    "storage_bucket": "appnovel-b9cd4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:491552895352:android:7a48758f8d9e668b59188d",
+        "android_client_info": {
+          "package_name": "com.example.comicapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "491552895352-so17q1nj1ieohh7lf0d3rre4g6q8knd4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjN_Aff2mn9nt5fsRHJ6A0XKCdymVFjwE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "491552895352-so17q1nj1ieohh7lf0d3rre4g6q8knd4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

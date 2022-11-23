@@ -1,4 +1,4 @@
-package com.example.comicapp.Login;
+package com.example.comicapp.OnClick.Login;
 
 import android.os.Bundle;
 
