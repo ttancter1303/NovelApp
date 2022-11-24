@@ -1,10 +1,12 @@
-package com.example.comicapp.OnClick.Login;
+package com.example.comicapp.Login;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -14,8 +16,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.comicapp.MainActivity;
 import com.example.comicapp.R;
 import com.example.comicapp.databinding.FragmentLoginBinding;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginFragment extends Fragment {
     FragmentLoginBinding binding;
@@ -24,7 +28,7 @@ public class LoginFragment extends Fragment {
     EditText mEdtAccount;
     EditText mEdtPassword;
     TextView mTxtForgotPassword;
-
+    FirebaseAuth firebaseAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,24 +42,29 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
 
         binding = FragmentLoginBinding.inflate(inflater,container,false);
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        return binding.getRoot();
+
 
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        NavController navController = Navigation.findNavController(requireActivity(),R.id.fragmentContainerView3);
         mBtnLogin = binding.btnLogin;
         mBtnRegister = binding.btnRegister;
         mEdtAccount = binding.edtAccount;
         mEdtPassword = binding.edtPassword;
         mTxtForgotPassword = binding.txtForgotPassword;
+        firebaseAuth = FirebaseAuth.getInstance();
+
 
         mBtnLogin.setOnClickListener(v->{
-
+            Intent intent = new Intent(requireContext(), MainActivity.class);
+            startActivity(intent);
         });
         mBtnRegister.setOnClickListener(v->{
-
+            navController.navigate(R.id.action_loginFragment_to_registerFragment);
         });
         mEdtAccount.setOnClickListener(v->{
 

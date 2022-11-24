@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
+import androidx.navigation.NavInflater;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
@@ -58,27 +61,34 @@ public class MainActivity extends AppCompatActivity {
 //        });
 //        mediator.attach();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
+//        NavController navController = Navigation.findNavController(this, R.id.fragment_host_container);
+        NavHostFragment navHostFragment =
+                (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_host_container);
+        NavGraph graph = navHostFragment.getNavController().getNavInflater().inflate(R.navigation.nav_graph);
+        navHostFragment.getNavController().setGraph(graph);
+        NavController navController = navHostFragment.getNavController();
+
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.action_history:
-                    Navigation.findNavController(this, R.id.fragment_host_container).popBackStack();
-                    Navigation.findNavController(this, R.id.fragment_host_container).navigate(R.id.historyFragment);
+                    navController.popBackStack();
+                    navController.navigate(R.id.historyFragment);
 //                    replaceFragment(new HistoryFragment());
                     break;
                 case R.id.action_home:
-                    Navigation.findNavController(this, R.id.fragment_host_container).popBackStack();
-                    Navigation.findNavController(this, R.id.fragment_host_container).navigate(R.id.homeFragment);
+                    navController.popBackStack();
+                    navController.navigate(R.id.homeFragment);
 //                    replaceFragment(new HomeFragment());
                     break;
                 case R.id.action_notification:
-                    Navigation.findNavController(this, R.id.fragment_host_container).popBackStack();
-                    Navigation.findNavController(this, R.id.fragment_host_container).navigate(R.id.notificationFragment);
+                    navController.popBackStack();
+                    navController.navigate(R.id.notificationFragment);
 //                    replaceFragment(new NotificationFragment());
 //                    replaceFragment(new ComicDetailFragment());
                     break;
                 case R.id.action_user:
-                    Navigation.findNavController(this, R.id.fragment_host_container).popBackStack();
-                    Navigation.findNavController(this, R.id.fragment_host_container).navigate(R.id.userFragment);
+                    navController.popBackStack();
+                    navController.navigate(R.id.userFragment);
 //                    replaceFragment(new UserFragment());
                     break;
 
@@ -86,10 +96,11 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
     }
-    private void replaceFragment(Fragment fragment){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_host_container, fragment);
-        fragmentTransaction.commit();
-    }
+
+//    private void replaceFragment(Fragment fragment){
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.fragment_host_container, fragment);
+//        fragmentTransaction.commit();
+//    }
 }

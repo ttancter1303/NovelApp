@@ -6,33 +6,19 @@
     app:startDestination="@id/historyFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.comicapp.ComicFragment.ComicFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_comic">
-
-        <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.comicapp.HistoryFragment.ComicDetailFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_comic_detail">
-
-    </fragment>
-    <fragment
         android:id="@+id/userFragment"
         android:name="com.example.comicapp.UserFragment.UserFragment"
         android:label="fragment_user"
-        tools:layout="@layout/fragment_user" >
+        tools:layout="@layout/fragment_user">
         <action
             android:id="@+id/action_userFragment_to_changeProfileFragment"
             app:destination="@id/changeProfileFragment" />
         <action
             android:id="@+id/action_userFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
+        <action
+            android:id="@+id/action_userFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/changeProfileFragment"
@@ -48,7 +34,11 @@
         android:id="@+id/historyFragment"
         android:name="com.example.comicapp.HistoryFragment.HistoryFragment"
         android:label="fragment_history"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_historyFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.comicapp.HomeFragment.HomeFragment"
@@ -59,5 +49,15 @@
         android:name="com.example.comicapp.NotificationFragment.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.comicapp.UserFragment.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.comicapp.LoginActivity"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
 
 </navigation>

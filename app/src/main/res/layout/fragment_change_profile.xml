@@ -12,14 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sửa hồ sơ"
+        android:textSize="35sp"
         android:gravity="center_horizontal"
+        android:layout_marginBottom="40dp"
         />
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:src="@tools:sample/avatars"
-        android:padding="10dp"/>
+
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -30,7 +27,7 @@
             android:layout_height="50dp"
             app:layout_column="0"
             app:layout_row="0"
-            tools:src="@drawable/users"
+            android:src="@drawable/users"
             style="@style/user_text_option"/>
         <ImageView
             android:id="@+id/imageView7"
@@ -38,7 +35,7 @@
             android:layout_height="50dp"
             app:layout_column="0"
             app:layout_row="1"
-            tools:src="@drawable/email"
+            android:src="@drawable/email"
             style="@style/user_text_option"/>
 
         <ImageView
@@ -47,7 +44,7 @@
             android:layout_height="50dp"
             app:layout_column="0"
             app:layout_row="2"
-            tools:src="@drawable/phone"
+            android:src="@drawable/phone"
             style="@style/user_text_option"/>
         <ImageView
             android:id="@+id/imageView9"
@@ -80,6 +77,7 @@
 
         <EditText
             android:id="@+id/edt_user_email"
+            android:enabled="false"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -153,12 +151,13 @@
             </RadioGroup>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_save_chage_profile"
             android:layout_width="134dp"
+            android:layout_marginTop="40dp"
             android:layout_height="wrap_content"
             android:text="Lưu"
             app:layout_column="1"
-            app:layout_row="7" />
+            app:layout_row="6" />
 
 
     </androidx.gridlayout.widget.GridLayout>

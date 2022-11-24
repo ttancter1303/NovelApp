@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -29,7 +30,8 @@ public class UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user, container, false);
+        binding = FragmentUserBinding.inflate(inflater,container,false);
+        return binding.getRoot();
     }
 
     @Override
@@ -41,17 +43,19 @@ public class UserFragment extends Fragment {
         txtChangePassword = binding.txtChangePassword;
         txtLogout = binding.txtLogout;
 
+        NavController navController = Navigation.findNavController(requireActivity(),R.id.fragment_host_container);
         txtChangeProfile.setOnClickListener(v->{
-            Navigation.findNavController(requireActivity(), R.id.fragment_host_container).navigate(R.id.action_userFragment_to_changeProfileFragment);
+            navController.navigate(R.id.action_userFragment_to_changeProfileFragment);
         });
         txtSetting.setOnClickListener(v->{
-            Navigation.findNavController(requireActivity(), R.id.fragment_host_container).navigate(R.id.action_userFragment_to_settingFragment);
+            navController.navigate(R.id.action_userFragment_to_settingFragment);
         });
         txtChangePassword.setOnClickListener(v->{
-
+            navController.navigate(R.id.action_userFragment_to_changePasswordFragment);
         });
         txtLogout.setOnClickListener(v->{
-
+            navController.popBackStack();
+            navController.navigate(R.id.loginActivity);
         });
 
 

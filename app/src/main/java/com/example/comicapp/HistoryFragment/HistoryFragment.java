@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -13,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.comicapp.R;
 import com.example.comicapp.ViewPager2Adapter.HistoryViewPager2Adapter;
@@ -28,7 +30,7 @@ public class HistoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHistoryBinding.inflate(getLayoutInflater());
-        return inflater.inflate(R.layout.fragment_history, container, false);
+        return binding.getRoot();
     }
 
     @Override
@@ -51,6 +53,11 @@ public class HistoryFragment extends Fragment {
             }
         });
         mediator.attach();
+        ImageView mBtnSetting = binding.btnSetting;
+        mBtnSetting.setOnClickListener(v->{
+            Navigation.findNavController(requireActivity(), R.id.fragment_host_container).
+                    navigate(R.id.action_historyFragment_to_settingFragment);
+        });
 
     }
 }

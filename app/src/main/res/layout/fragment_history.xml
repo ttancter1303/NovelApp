@@ -16,9 +16,9 @@
         <TextView
             android:layout_width="336dp"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            style="@style/header"
             android:text="Tủ Truyện"
-            android:textSize="35sp" />
+             />
 
         <ImageView
             android:id="@+id/btn_setting"

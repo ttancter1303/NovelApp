@@ -5,23 +5,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.comicapp.R;
-import com.example.comicapp.RecycleAdapter.ComicDetailRVAdapter;
-import com.example.comicapp.RecycleAdapter.HistoryRecycleAdapter;
-import com.example.comicapp.ViewPager2Adapter.ComicDetailAdapter;
-import com.example.comicapp.ViewPager2Adapter.HistoryViewPager2Adapter;
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
-
-import java.util.ArrayList;
 
 public class ComicDetailFragment extends Fragment {
 

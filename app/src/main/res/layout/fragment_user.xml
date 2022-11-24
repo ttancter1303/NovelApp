@@ -11,14 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hồ sơ"
-        android:textSize="25sp"/>
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_gravity="center"
-        android:background="@drawable/slime300" />
+        style="@style/header"/>
     <TextView
         android:id="@+id/txt_change_profile"
         android:layout_width="match_parent"
@@ -35,7 +28,8 @@
         android:id="@+id/txt_change_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Đổi mật khẩu" />
+        android:text="Đổi mật khẩu"
+        style="@style/user_text_option"/>
     <TextView
         android:id="@+id/txt_logout"
         android:layout_width="match_parent"
