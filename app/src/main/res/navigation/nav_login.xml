@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment2"
+            app:destination="@id/forgotPasswordFragment2" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -23,14 +26,14 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/homeFragment2"
-        android:name="com.example.comicapp.HomeFragment.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
     <activity
         android:id="@+id/mainActivity"
         android:name="com.example.comicapp.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment2"
+        android:name="com.example.comicapp.Login.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
 </navigation>

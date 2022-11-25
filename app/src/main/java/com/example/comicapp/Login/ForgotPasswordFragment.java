@@ -2,65 +2,74 @@ package com.example.comicapp.Login;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.comicapp.R;
+import com.example.comicapp.databinding.FragmentForgotPasswordBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ForgotPasswordFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ForgotPasswordFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ForgotPasswordFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ForgotPasswordFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ForgotPasswordFragment newInstance(String param1, String param2) {
-        ForgotPasswordFragment fragment = new ForgotPasswordFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    EditText mEmail;
+    Button mReset;
+    ProgressBar mLoading;
+    FragmentForgotPasswordBinding binding;
+    FirebaseAuth mFirebaseAuth;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        mFirebaseAuth = FirebaseAuth.getInstance();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_forgot_password2, container, false);
+        binding = FragmentForgotPasswordBinding.inflate(inflater,container,false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mReset = binding.btnRegisterAccept;
+        mEmail = binding.edtRegisterEmail;
+        mLoading = binding.loading;
+        mReset.setOnClickListener(v->{
+            forgotPassword(mEmail.getText().toString());
+        });
+    }
+    public void forgotPassword(String Email){
+        mLoading.setVisibility(View.VISIBLE);
+        mLoading.setProgress(0,true);
+        mFirebaseAuth.sendPasswordResetEmail(Email)
+                .addOnCompleteListener(requireActivity(), new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        mLoading.setVisibility(View.GONE);
+                        mLoading.setProgress(0,false);
+                        if(task.isSuccessful()){
+                            Toast.makeText(requireContext(), "Vui lòng kiểm tra hộp thư của email "+ mEmail.getText(), Toast.LENGTH_SHORT).show();
+                            requireActivity().onBackPressed();
+                        }else{
+                            Toast.makeText(requireContext(),  task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
     }
 }

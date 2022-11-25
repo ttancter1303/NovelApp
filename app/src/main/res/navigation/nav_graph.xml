@@ -17,8 +17,8 @@
             android:id="@+id/action_userFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
         <action
-            android:id="@+id/action_userFragment_to_changePasswordFragment"
-            app:destination="@id/changePasswordFragment" />
+            android:id="@+id/action_userFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/changeProfileFragment"
@@ -49,15 +49,32 @@
         android:name="com.example.comicapp.NotificationFragment.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
-    <fragment
-        android:id="@+id/changePasswordFragment"
-        android:name="com.example.comicapp.UserFragment.ChangePasswordFragment"
-        android:label="fragment_change_password"
-        tools:layout="@layout/fragment_change_password" />
     <activity
         android:id="@+id/loginActivity"
         android:name="com.example.comicapp.LoginActivity"
         android:label="activity_login"
         tools:layout="@layout/activity_login" />
+    <fragment
+        android:id="@+id/newComicFragment"
+        android:name="com.example.comicapp.ComicFragment.NewComicFragment"
+        android:label="NewComicFragment" >
+        <action
+            android:id="@+id/action_newComicFragment_to_comicDetailFragment"
+            app:destination="@id/comicDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/comicDetailFragment"
+        android:name="com.example.comicapp.HistoryFragment.ComicDetailFragment"
+        android:label="ComicDetailFragment" />
+    <fragment
+        android:id="@+id/readNovelFragment"
+        android:name="com.example.comicapp.ComicFragment.ReadNovelFragment"
+        android:label="fragment_read_novel"
+        tools:layout="@layout/fragment_read_novel" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.comicapp.Login.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
 
 </navigation>

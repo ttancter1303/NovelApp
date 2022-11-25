@@ -14,11 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.comicapp.MainActivity;
 import com.example.comicapp.R;
 import com.example.comicapp.databinding.FragmentLoginBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class LoginFragment extends Fragment {
@@ -28,11 +33,13 @@ public class LoginFragment extends Fragment {
     EditText mEdtAccount;
     EditText mEdtPassword;
     TextView mTxtForgotPassword;
-    FirebaseAuth firebaseAuth;
+    ProgressBar mLoading;
+    FirebaseAuth mFirebaseAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
     }
 
@@ -56,25 +63,38 @@ public class LoginFragment extends Fragment {
         mEdtAccount = binding.edtAccount;
         mEdtPassword = binding.edtPassword;
         mTxtForgotPassword = binding.txtForgotPassword;
-        firebaseAuth = FirebaseAuth.getInstance();
-
+        mLoading = binding.loading;
 
         mBtnLogin.setOnClickListener(v->{
-            Intent intent = new Intent(requireContext(), MainActivity.class);
-            startActivity(intent);
+            logIn(mEdtAccount.getText().toString(), mEdtPassword.getText().toString());
         });
         mBtnRegister.setOnClickListener(v->{
             navController.navigate(R.id.action_loginFragment_to_registerFragment);
         });
-        mEdtAccount.setOnClickListener(v->{
 
-
-        });
-        mEdtPassword.setOnClickListener(v->{
-
-        });
         mTxtForgotPassword.setOnClickListener(v->{
-
+            navController.navigate(R.id.action_loginFragment_to_forgotPasswordFragment2);
         });
+    }
+    public void logIn(String Email,String Password){
+        mLoading.setVisibility(View.VISIBLE);
+        mLoading.setProgress(0,true);
+        mFirebaseAuth.signInWithEmailAndPassword(Email, Password)
+                .addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        mLoading.setVisibility(View.GONE);
+                        mLoading.setProgress(0,false);
+                        if(task.isSuccessful()){
+                            Toast.makeText(requireContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(requireContext(), MainActivity.class);
+                            startActivity(intent);
+                            mBtnLogin.setText("");
+                            mEdtPassword.setText("");
+                        }else{
+                            Toast.makeText(requireContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

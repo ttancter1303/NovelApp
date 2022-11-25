@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.comicapp.R;
 import com.example.comicapp.databinding.FragmentRegisterBinding;
@@ -28,12 +31,14 @@ public class RegisterFragment extends Fragment {
     EditText mEdtRegisterName;
     EditText mEdtRegisterEmail;
     EditText mEdtRegisterPassword;
-    EditText mEdtRegisterPasswordAgain;
     Button mBtnRegisterAccept;
+    ProgressBar mLoading;
+    FirebaseAuth mFirebaseAuth;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFirebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
@@ -52,31 +57,34 @@ public class RegisterFragment extends Fragment {
         mEdtRegisterEmail = binding.edtRegisterEmail;
         mEdtRegisterName = binding.edtRegisterName;
         mEdtRegisterPassword = binding.edtRegisterPassword;
-        mEdtRegisterPasswordAgain = binding.edtRegisterPasswordAgain;
+
         mBtnRegisterAccept = binding.btnRegisterAccept;
-
-
-        mEdtRegisterName.setOnClickListener(v->{
-
-        });
-
-        mEdtRegisterEmail.setOnClickListener(v->{
-
-        });
-
-        mEdtRegisterPassword.setOnClickListener(v->{
-
-        });
-
-        mEdtRegisterPasswordAgain.setOnClickListener(v->{
-
-        });
+        mLoading = binding.loading;
+        NavController navController = Navigation.findNavController(requireActivity(),R.id.fragmentContainerView3);
 
         mBtnRegisterAccept.setOnClickListener(v->{
-            Navigation.findNavController(requireActivity(),R.id.fragmentContainerView3).navigate(R.id.action_registerFragment_to_loginFragment);
+            signUp(mEdtRegisterEmail.getText().toString(),mEdtRegisterPassword.getText().toString());
         });
 
     }
+    public void signUp(String Email, String Password){
+        mLoading.setVisibility(View.VISIBLE);
+        mLoading.setProgress(0,true);
+        mFirebaseAuth.createUserWithEmailAndPassword(Email, Password)
+                .addOnCompleteListener(requireActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        mLoading.setProgress(0,false);
+                        mLoading.setVisibility(View.GONE);
+                        if(task.isSuccessful()){
+                            Toast.makeText(requireContext(), "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                            requireActivity().onBackPressed();
+                        }else{
+                            Toast.makeText(requireContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
 
+    }
 
 }
