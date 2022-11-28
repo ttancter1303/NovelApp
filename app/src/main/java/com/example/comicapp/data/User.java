@@ -1,14 +1,14 @@
 package com.example.comicapp.data;
 
 public class User {
-    private int id;
+    private String id;
     private String name;
     private String email;
     private int birth;
     private int phoneNumb;
     private String introduce;
 
-    public User(int id, String name, String email, int birth, int phoneNumb, String introduce) {
+    public User(String id, String name, String email, int birth, int phoneNumb, String introduce) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -17,11 +17,16 @@ public class User {
         this.introduce = introduce;
     }
 
-    public int getId() {
+    public User(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

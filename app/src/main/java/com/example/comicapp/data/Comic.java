@@ -1,23 +1,36 @@
 package com.example.comicapp.data;
 
 public class Comic {
-    private int id;
+    private String id;
     private String title;
+    private String image;
     private String author;
-    private int status;
+    private Boolean status;
 
-    public Comic(int id, String title, String author, int status) {
+    public Comic(String id, String title, String image, Boolean status) {
         this.id = id;
         this.title = title;
+        this.image = image;
         this.author = author;
         this.status = status;
     }
 
-    public int getId() {
+    @Override
+    public String toString() {
+        return "Comic{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", image='" + image + '\'' +
+                ", author='" + author + '\'' +
+                ", status=" + status +
+                '}';
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -29,6 +42,14 @@ public class Comic {
         this.title = title;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getAuthor() {
         return author;
     }
@@ -37,11 +58,11 @@ public class Comic {
         this.author = author;
     }
 
-    public int getStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Boolean status) {
         this.status = status;
     }
 }
