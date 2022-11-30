@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/dark_grey</item>
 <!--        <item name="colorOnPrimary">@color/black</i tem>-->
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -22,5 +22,5 @@
 
     <style name="Theme.ComicApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.ComicApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+    <style name="Theme.ComicApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

@@ -111,20 +111,7 @@ public class RegisterFragment extends Fragment {
                     .set(dataMap);
         }
 
-//        mFirestore.collection("user")
-//                .add(dataMap)
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Log.d("ttan", "DocumentSnapshot added with ID: " + documentReference.getId());
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Log.w("ttan", "Error adding document", e);
-//                    }
-//                });
+
 
     }
 

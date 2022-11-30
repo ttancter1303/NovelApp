@@ -1,13 +1,20 @@
 package com.example.comicapp.data;
 
-public class Comic {
+import java.util.List;
+
+public class Novel {
     private String id;
     private String title;
     private String image;
     private String author;
     private Boolean status;
+    private List<Chapter> chapters;
 
-    public Comic(String id, String title, String image, Boolean status) {
+    public void setChapters(List<Chapter> chapters){
+        this.chapters = chapters;
+    }
+
+    public Novel(String id, String title, String image, Boolean status) {
         this.id = id;
         this.title = title;
         this.image = image;
@@ -15,14 +22,19 @@ public class Comic {
         this.status = status;
     }
 
+    public List<Chapter> getChapters() {
+        return chapters;
+    }
+
     @Override
     public String toString() {
-        return "Comic{" +
+        return "Novel{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", image='" + image + '\'' +
                 ", author='" + author + '\'' +
                 ", status=" + status +
+                ", chapters=" + chapters +
                 '}';
     }
 

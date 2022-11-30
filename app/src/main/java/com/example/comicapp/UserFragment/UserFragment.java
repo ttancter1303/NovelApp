@@ -51,6 +51,7 @@ public class UserFragment extends Fragment {
         txtSetting.setOnClickListener(v->{
             navController.popBackStack();
             navController.navigate(R.id.action_userFragment_to_settingFragment);
+//            navController.navigate(R.id.settingsFragment);
         });
         txtChangePassword.setOnClickListener(v->{
             navController.navigate(R.id.action_userFragment_to_forgotPasswordFragment);

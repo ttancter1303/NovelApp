@@ -76,5 +76,9 @@
         android:name="com.example.comicapp.Login.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.comicapp.UserFragment.SettingsFragment"
+        android:label="SettingsFragment" />
 
 </navigation>

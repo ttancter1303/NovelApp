@@ -20,8 +20,7 @@ import android.widget.Toast;
 
 import com.example.comicapp.MainActivity;
 import com.example.comicapp.R;
-import com.example.comicapp.Repository.NovelByAuthorRepository;
-import com.example.comicapp.Repository.UserListRepository;
+import com.example.comicapp.Repository.NovelRepository;
 import com.example.comicapp.databinding.FragmentLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -88,10 +87,10 @@ public class LoginFragment extends Fragment {
                         mLoading.setVisibility(View.GONE);
                         mLoading.setProgress(0,false);
                         if(task.isSuccessful()){
-//                            NovelByAuthorRepository novelByAuthorRepository = new NovelByAuthorRepository();
-//                            novelByAuthorRepository.getAllNovel();
-                            UserListRepository userListRepository = new UserListRepository();
-                            userListRepository.getAllUser();
+
+                            NovelRepository novelByAuthorRepository = new NovelRepository();
+                            novelByAuthorRepository.getAllNovel();
+
                             Toast.makeText(requireContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(requireContext(), MainActivity.class);
                             startActivity(intent);

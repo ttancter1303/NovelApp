@@ -44,4 +44,14 @@ public class Chapter {
     public void setDate(int date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "Chapter{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", content='" + content + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }
