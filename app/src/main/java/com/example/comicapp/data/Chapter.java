@@ -1,23 +1,22 @@
 package com.example.comicapp.data;
 
 public class Chapter {
-    private int id;
+    private String id;
     private String name;
     private String content;
     private int date;
 
-    public Chapter(int id, String name, String content, int date) {
+    public Chapter(String id, String name, String content) {
         this.id = id;
         this.name = name;
         this.content = content;
-        this.date = date;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

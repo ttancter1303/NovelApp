@@ -13,7 +13,7 @@ public class NovelViewModel extends ViewModel {
     LiveData<List<Novel>> mAllNovel;
     public NovelViewModel(){
         mNovelRepository = new NovelRepository();
-        mAllNovel = mNovelRepository.getAllNovel();
+        mAllNovel = mNovelRepository.getAllNovelv2();
     }
     public LiveData<List<Novel>> getAllNovel(){
         return mAllNovel;
