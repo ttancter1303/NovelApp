@@ -3,13 +3,20 @@ package com.example.comicapp.RecycleAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.comicapp.R;
+import com.example.comicapp.data.Novel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NewComicAdapter extends RecyclerView.Adapter<NewComicAdapter.ViewHolder>{
+    ImageView mImage;
+    ArrayList<Novel> mData = new ArrayList<>();
     @NonNull
     @Override
     public NewComicAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -30,6 +37,10 @@ public class NewComicAdapter extends RecyclerView.Adapter<NewComicAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            mImage = itemView.findViewById(R.id.img_newComic);
+        }
+        public void bindView(Novel novel){
+            mImage.setImageDrawable(novel.getImage());
         }
     }
 }

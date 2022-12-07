@@ -88,9 +88,6 @@ public class LoginFragment extends Fragment {
                         mLoading.setProgress(0,false);
                         if(task.isSuccessful()){
 
-                            NovelRepository novelByAuthorRepository = new NovelRepository();
-                            novelByAuthorRepository.getAllNovelv2();
-
                             Toast.makeText(requireContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(requireContext(), MainActivity.class);
                             startActivity(intent);

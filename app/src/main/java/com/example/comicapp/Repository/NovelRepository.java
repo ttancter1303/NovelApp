@@ -1,9 +1,6 @@
 package com.example.comicapp.Repository;
 
-import android.util.Log;
-
 import androidx.annotation.Nullable;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.comicapp.data.Chapter;
@@ -74,13 +71,13 @@ public class NovelRepository {
 //               });
 //        return novels;
 //    }
-    public LiveData<List<Novel>> getAllNovelv2(){
-        MutableLiveData<List<Novel>> novels = new MutableLiveData<>(new ArrayList<>());
+    public MutableLiveData<ArrayList<Novel>> getAllNovelv2(){
+        MutableLiveData<ArrayList<Novel>> novels = new MutableLiveData<>(new ArrayList<>());
         mFirestore.collection( "novel")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        List<Novel> novelList = new ArrayList<>();
+                        ArrayList<Novel> novelList = new ArrayList<>();
                         for (DocumentSnapshot document : value.getDocuments()) {
 //                           Novel novel = new Novel(document.getId(),document.get("name",String.class),document.get("image",String.class),document.get("status",Boolean.class));
 //                           Log.d("ttan", "onEvent: "+ novel.toString());
@@ -106,7 +103,6 @@ public class NovelRepository {
                                             }
                                             novel.setChapters(chapters);
                                             novelList.add(novel);
-                                            Log.d("ttan", "onEvent: " + novel);
 
                                         }
                                                 });
