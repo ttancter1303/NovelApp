@@ -1,14 +1,13 @@
 package com.example.comicapp.data;
 
-import java.lang.ref.Reference;
 import java.util.List;
 
 public class Novel {
     private String id;
     private String title;
     private String intro;
-    private Reference image;
-    private Reference author;
+    private String image;
+    private String author;
     private Boolean status;
     private List<Chapter> chapters;
 
@@ -16,7 +15,7 @@ public class Novel {
         this.chapters = chapters;
     }
 
-    public Novel(String id, String title, Reference image, Boolean status) {
+    public Novel(String id, String title, String image, Boolean status) {
         this.id = id;
         this.title = title;
         this.image = image;
@@ -24,7 +23,7 @@ public class Novel {
         this.status = status;
     }
 
-    public Novel(String id, String title, String intro, Reference image, Reference author, Boolean status) {
+    public Novel(String id, String title, String intro, String image, String author, Boolean status) {
         this.id = id;
         this.title = title;
         this.intro = intro;
@@ -73,19 +72,19 @@ public class Novel {
         this.title = title;
     }
 
-    public Reference getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(Reference image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
-    public Reference getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Reference author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 

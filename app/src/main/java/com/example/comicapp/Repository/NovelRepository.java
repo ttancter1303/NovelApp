@@ -71,23 +71,23 @@ public class NovelRepository {
 //               });
 //        return novels;
 //    }
-    public MutableLiveData<ArrayList<Novel>> getAllNovelv2(){
-        MutableLiveData<ArrayList<Novel>> novels = new MutableLiveData<>(new ArrayList<>());
+    public MutableLiveData<List<Novel>> getAllNovelv2(){
+        MutableLiveData<List<Novel>> novels = new MutableLiveData<>(new ArrayList<>());
         mFirestore.collection( "novel")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        ArrayList<Novel> novelList = new ArrayList<>();
+                        List<Novel> novelList = new ArrayList<>();
                         for (DocumentSnapshot document : value.getDocuments()) {
 //                           Novel novel = new Novel(document.getId(),document.get("name",String.class),document.get("image",String.class),document.get("status",Boolean.class));
 //                           Log.d("ttan", "onEvent: "+ novel.toString());
                             String id = document.getId();
                             String gioiThieu = document.get("intro", String.class);
-                            Reference image = document.get("image", Reference.class);
+                            String image = document.get("image", String.class);
                             String name = document.get("name", String.class);
                             Boolean status = document.get("status", Boolean.class);
-                            Reference author = document.get("author",Reference.class);
-                            Novel novel = new Novel(id, name,gioiThieu, image,author, status);
+                            String author = document.get("author",String.class);
+                            Novel novel = new Novel(id, name,gioiThieu, image, author, status);
                             document.getReference().collection("chapter")
                                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                                         @Override

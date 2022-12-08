@@ -8,6 +8,7 @@
     android:id="@+id/comicMain"
     android:orientation="vertical"
 
+
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout

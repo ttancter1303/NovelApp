@@ -20,14 +20,22 @@ import com.example.comicapp.NotificationFragment.NotificationFragment;
 import com.example.comicapp.UserFragment.UserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private TabLayout tabLayout;
+    FirebaseUser mFirebaseUser;
+    FirebaseAuth mFirebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+
 //        if(savedInstanceState == null){
 //            replaceFragment(new HistoryFragment());
 //        }
@@ -64,9 +72,19 @@ public class MainActivity extends AppCompatActivity {
 //        NavController navController = Navigation.findNavController(this, R.id.fragment_host_container);
         NavHostFragment navHostFragment =
                 (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_host_container);
-        NavGraph graph = navHostFragment.getNavController().getNavInflater().inflate(R.navigation.nav_graph);
-        navHostFragment.getNavController().setGraph(graph);
+        NavGraph navGraph = navHostFragment.getNavController().getNavInflater().inflate(R.navigation.nav_graph);
+
+//        NavGraph graph = navHostFragment.getNavController().getNavInflater().inflate(R.navigation.nav_graph);
+        if (mFirebaseUser != null){
+            navGraph.setStartDestination(R.id.historyFragment);
+        }else{
+            navGraph.setStartDestination(R.id.loginActivity);
+        }
+
+        navHostFragment.getNavController().setGraph(navGraph);
         NavController navController = navHostFragment.getNavController();
+
+
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
@@ -103,4 +121,16 @@ public class MainActivity extends AppCompatActivity {
 //        fragmentTransaction.replace(R.id.fragment_host_container, fragment);
 //        fragmentTransaction.commit();
 //    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        NavController controller = Navigation.findNavController(this,R.id.fragment_host_container);
+//        NavGraph navGraph = controller.getGraph();
+//        if (mFirebaseUser != null){
+//            navGraph.setStartDestination(R.id.historyFragment);
+//        }else{
+//            navGraph.setStartDestination(R.id.loginActivity);
+//        }
+    }
 }
