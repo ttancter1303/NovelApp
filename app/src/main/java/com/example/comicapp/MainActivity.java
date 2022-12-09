@@ -35,79 +35,38 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-
-//        if(savedInstanceState == null){
-//            replaceFragment(new HistoryFragment());
-//        }
-//        viewPager2 = findViewById(R.id.viewPager2Home);
-//        tabLayout = findViewById(R.id.tabHome);
-//        MainAdapter adapter = new MainAdapter(this);
-//        viewPager2.setAdapter(adapter);
-//
-//        TabLayoutMediator mediator =new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-//            @Override
-//            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-//                switch (position){
-//                    case 0:
-//                        tab.setText("Tủ Truyện");
-//
-//                        break;
-//                    case 1:
-//                        tab.setText("Home");
-//
-//                        break;
-//                    case 2:
-//                        tab.setText("Notification");
-//
-//                        break;
-//                    case 3:
-//                        tab.setText("Setting");
-//
-//                        break;
-//                }
-//            }
-//        });
-//        mediator.attach();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
-//        NavController navController = Navigation.findNavController(this, R.id.fragment_host_container);
+        NavController navController = Navigation.findNavController(this, R.id.fragment_host_container);
+
         NavHostFragment navHostFragment =
                 (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_host_container);
+
         NavGraph navGraph = navHostFragment.getNavController().getNavInflater().inflate(R.navigation.nav_graph);
 
-//        NavGraph graph = navHostFragment.getNavController().getNavInflater().inflate(R.navigation.nav_graph);
         if (mFirebaseUser != null){
-            navGraph.setStartDestination(R.id.historyFragment);
+            navGraph.setStartDestination(R.id.mainActivity);
         }else{
             navGraph.setStartDestination(R.id.loginActivity);
         }
 
         navHostFragment.getNavController().setGraph(navGraph);
-        NavController navController = navHostFragment.getNavController();
-
-
-
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.action_history:
                     navController.popBackStack();
                     navController.navigate(R.id.historyFragment);
-//                    replaceFragment(new HistoryFragment());
                     break;
                 case R.id.action_home:
                     navController.popBackStack();
                     navController.navigate(R.id.homeFragment);
-//                    replaceFragment(new HomeFragment());
                     break;
                 case R.id.action_notification:
                     navController.popBackStack();
                     navController.navigate(R.id.notificationFragment);
-//                    replaceFragment(new NotificationFragment());
-//                    replaceFragment(new ComicDetailFragment());
                     break;
                 case R.id.action_user:
                     navController.popBackStack();
                     navController.navigate(R.id.userFragment);
-//                    replaceFragment(new UserFragment());
                     break;
 
             }
@@ -115,22 +74,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    private void replaceFragment(Fragment fragment){
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.fragment_host_container, fragment);
-//        fragmentTransaction.commit();
-//    }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        NavController controller = Navigation.findNavController(this,R.id.fragment_host_container);
-//        NavGraph navGraph = controller.getGraph();
-//        if (mFirebaseUser != null){
-//            navGraph.setStartDestination(R.id.historyFragment);
-//        }else{
-//            navGraph.setStartDestination(R.id.loginActivity);
-//        }
+
     }
 }

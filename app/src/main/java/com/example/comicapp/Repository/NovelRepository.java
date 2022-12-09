@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.comicapp.data.Chapter;
 import com.example.comicapp.data.Novel;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -83,10 +84,10 @@ public class NovelRepository {
 //                           Log.d("ttan", "onEvent: "+ novel.toString());
                             String id = document.getId();
                             String gioiThieu = document.get("intro", String.class);
-                            String image = document.get("image", String.class);
+                            DocumentReference image = document.get("image", DocumentReference.class);
                             String name = document.get("name", String.class);
                             Boolean status = document.get("status", Boolean.class);
-                            String author = document.get("author",String.class);
+                            DocumentReference author = document.get("author",DocumentReference.class);
                             Novel novel = new Novel(id, name,gioiThieu, image, author, status);
                             document.getReference().collection("chapter")
                                     .addSnapshotListener(new EventListener<QuerySnapshot>() {

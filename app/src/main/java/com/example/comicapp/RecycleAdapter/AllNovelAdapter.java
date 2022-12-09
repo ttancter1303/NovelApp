@@ -26,7 +26,10 @@ import java.util.List;
 public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHolder>{
     ImageView mImage;
     List<Novel> mData = new ArrayList<>();
+    FirebaseStorage storage;
     StorageReference mStorageReference;
+
+
 
     public void setData(List<Novel> data){
         mData = data;
@@ -36,6 +39,7 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
     @NonNull
     @Override
     public AllNovelAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        storage = FirebaseStorage.getInstance();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_comic,parent,false);
         return new ViewHolder(view);
     }
@@ -56,9 +60,10 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
             mImage = itemView.findViewById(R.id.img_newComic);
         }
         public void bindView(Novel novel){
-            mStorageReference = FirebaseStorage.getInstance().getReference(novel.getImage());
+            mStorageReference = storage.getReferenceFromUrl(String.valueOf(novel.getImage()));
+
             try {
-                final File localFile = File.createTempFile("tempImg","jpg");
+                final File localFile = File.createTempFile("temp","jpg");
                 mStorageReference.getFile(localFile)
                         .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                             @Override

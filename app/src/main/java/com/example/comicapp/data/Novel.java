@@ -1,13 +1,15 @@
 package com.example.comicapp.data;
 
+import com.google.firebase.firestore.DocumentReference;
+
 import java.util.List;
 
 public class Novel {
     private String id;
     private String title;
     private String intro;
-    private String image;
-    private String author;
+    private DocumentReference image;
+    private DocumentReference author;
     private Boolean status;
     private List<Chapter> chapters;
 
@@ -15,7 +17,7 @@ public class Novel {
         this.chapters = chapters;
     }
 
-    public Novel(String id, String title, String image, Boolean status) {
+    public Novel(String id, String title, DocumentReference image, Boolean status) {
         this.id = id;
         this.title = title;
         this.image = image;
@@ -23,7 +25,7 @@ public class Novel {
         this.status = status;
     }
 
-    public Novel(String id, String title, String intro, String image, String author, Boolean status) {
+    public Novel(String id, String title, String intro, DocumentReference image, DocumentReference author, Boolean status) {
         this.id = id;
         this.title = title;
         this.intro = intro;
@@ -72,19 +74,19 @@ public class Novel {
         this.title = title;
     }
 
-    public String getImage() {
+    public DocumentReference getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(DocumentReference image) {
         this.image = image;
     }
 
-    public String getAuthor() {
+    public DocumentReference getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(DocumentReference author) {
         this.author = author;
     }
 

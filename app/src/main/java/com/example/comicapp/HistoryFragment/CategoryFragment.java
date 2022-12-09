@@ -33,20 +33,6 @@ public class CategoryFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_category, container, false);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mNovelViewModel = new ViewModelProvider(this).get(NovelViewModel.class);
-        mNovelViewModel.getAllNovel().observe(getViewLifecycleOwner(), new Observer<List<Novel>>() {
-            @Override
-            public void onChanged(List<Novel> novels) {
-                for (Novel novel : novels) {
-                    Log.d("ttan", "onChanged: "+novel);
-                }
-            }
-        });
-
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -54,15 +40,6 @@ public class CategoryFragment extends Fragment {
         HistoryRecycleAdapter adapter = new HistoryRecycleAdapter(new ArrayList<>());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        if(mNovelViewModel.getAllNovel() != null){
-//            mNovelViewModel.getAllNovel().observe(getViewLifecycleOwner(), new Observer<List<Novel>>() {
-//                @Override
-//                public void onChanged(List<Novel> novels) {
-//                    for (Novel novel : novels) {
-//                        Log.d("ttan", "onChanged: "+novel);
-//                    }
-//                }
-//            });
+
         }
-    }
 }
