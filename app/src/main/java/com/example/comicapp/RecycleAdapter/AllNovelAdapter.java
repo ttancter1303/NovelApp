@@ -61,7 +61,6 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
         }
         public void bindView(Novel novel){
             mStorageReference = storage.getReferenceFromUrl(String.valueOf(novel.getImage()));
-
             try {
                 final File localFile = File.createTempFile("temp","jpg");
                 mStorageReference.getFile(localFile)
