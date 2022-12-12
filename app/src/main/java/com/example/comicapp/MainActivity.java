@@ -36,20 +36,22 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
-        NavController navController = Navigation.findNavController(this, R.id.fragment_host_container);
+//        NavController navController = Navigation.findNavController(this, R.id.fragment_host_container);
 
         NavHostFragment navHostFragment =
                 (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_host_container);
 
         NavGraph navGraph = navHostFragment.getNavController().getNavInflater().inflate(R.navigation.nav_graph);
 
-        if (mFirebaseUser != null){
-            navGraph.setStartDestination(R.id.mainActivity);
-        }else{
-            navGraph.setStartDestination(R.id.loginActivity);
-        }
+//        if (mFirebaseUser != null){
+//            navGraph.setStartDestination(R.id.mainActivity);
+//        }else{
+//            navGraph.setStartDestination(R.id.loginActivity);
+//        }
 
         navHostFragment.getNavController().setGraph(navGraph);
+        NavController navController = navHostFragment.getNavController();
+
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.action_history:

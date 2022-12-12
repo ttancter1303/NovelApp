@@ -49,11 +49,11 @@
         android:name="com.example.comicapp.NotificationFragment.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
-    <activity
-        android:id="@+id/loginActivity"
-        android:name="com.example.comicapp.LoginActivity"
-        android:label="activity_login"
-        tools:layout="@layout/activity_login" />
+<!--    <activity-->
+<!--        android:id="@+id/loginActivity"-->
+<!--        android:name="com.example.comicapp.LoginActivity"-->
+<!--        android:label="activity_login"-->
+<!--        tools:layout="@layout/activity_login" />-->
     <fragment
         android:id="@+id/newComicFragment"
         android:name="com.example.comicapp.ComicFragment.NewComicFragment"

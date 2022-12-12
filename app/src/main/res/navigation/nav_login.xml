@@ -26,11 +26,6 @@
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.comicapp.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
     <fragment
         android:id="@+id/forgotPasswordFragment2"
         android:name="com.example.comicapp.Login.ForgotPasswordFragment"

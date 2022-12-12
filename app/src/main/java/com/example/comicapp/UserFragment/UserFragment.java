@@ -1,5 +1,6 @@
 package com.example.comicapp.UserFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,8 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.comicapp.LoginActivity;
 import com.example.comicapp.R;
 import com.example.comicapp.databinding.FragmentUserBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class UserFragment extends Fragment {
     TextView txtChangeProfile;
@@ -22,6 +26,10 @@ public class UserFragment extends Fragment {
     TextView txtChangePassword;
     TextView txtLogout;
     FragmentUserBinding binding;
+
+    FirebaseUser mFirebaseUser;
+    FirebaseAuth mFirebaseAuth;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +37,9 @@ public class UserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         // Inflate the layout for this fragment
         binding = FragmentUserBinding.inflate(inflater,container,false);
         return binding.getRoot();
@@ -57,8 +68,9 @@ public class UserFragment extends Fragment {
             navController.navigate(R.id.action_userFragment_to_forgotPasswordFragment);
         });
         txtLogout.setOnClickListener(v->{
-            navController.popBackStack();
-            navController.navigate(R.id.loginActivity);
+            mFirebaseAuth.signOut();
+            startActivity(new Intent(requireContext(), LoginActivity.class));
+            requireActivity().finish();
         });
 
 
