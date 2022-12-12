@@ -2,6 +2,7 @@ package com.example.comicapp.RecycleAdapter;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,10 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHolder>{
-    ImageView mImage;
     List<Novel> mData = new ArrayList<>();
     FirebaseStorage storage;
-    StorageReference mStorageReference;
 
 
 
@@ -55,12 +54,15 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView mImage;
+        StorageReference mStorageReference;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mImage = itemView.findViewById(R.id.img_newComic);
         }
         public void bindView(Novel novel){
-            mStorageReference = storage.getReferenceFromUrl(String.valueOf(novel.getImage()));
+            mStorageReference = storage.getReference(novel.getImage());
             try {
                 final File localFile = File.createTempFile("temp","jpg");
                 mStorageReference.getFile(localFile)
@@ -73,7 +75,7 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-
+                                Log.d("PhucDVb", "onFailure: ", e);
                             }
                         });
             } catch (IOException e) {

@@ -23,12 +23,12 @@ public class NovelRepository {
     FirebaseStorage storage;
     StorageReference mStorageReference;
 
-    public NovelRepository(){
+    public NovelRepository() {
         storage = FirebaseStorage.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
     }
 
-//    public LiveData<List<Novel>> getAllNovel(){
+    //    public LiveData<List<Novel>> getAllNovel(){
 //        MutableLiveData<List<Novel>> novels = new MutableLiveData<>(new ArrayList<>());
 //       mFirestore.collection( "author")
 //               .addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -78,9 +78,9 @@ public class NovelRepository {
 //        return novels;
 //    }
     //cái hay sử dụng là allnovelv2
-    public MutableLiveData<List<Novel>> getAllNovelv2(){
+    public MutableLiveData<List<Novel>> getAllNovelv2() {
         MutableLiveData<List<Novel>> novels = new MutableLiveData<>(new ArrayList<>());
-        mFirestore.collection( "novel")
+        mFirestore.collection("novel")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -90,11 +90,11 @@ public class NovelRepository {
 //                           Log.d("ttan", "onEvent: "+ novel.toString());
                             String id = document.getId();
                             String gioiThieu = document.get("intro", String.class);
-                            DocumentReference image = document.get("image", DocumentReference.class);
+                            String image = document.get("image", String.class);
                             String name = document.get("name", String.class);
                             Boolean status = document.get("status", Boolean.class);
-                            DocumentReference author = document.get("author",DocumentReference.class);
-                            Novel novel = new Novel(id, name,gioiThieu, image, author, status);
+                            DocumentReference author = document.get("author", DocumentReference.class);
+                            Novel novel = new Novel(id, name, gioiThieu, image, author, status);
                             document.getReference().collection("chapter")
                                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                                         @Override
@@ -110,19 +110,20 @@ public class NovelRepository {
                                             }
                                             novel.setChapters(chapters);
                                             novelList.add(novel);
-
-                                        }
-                                                });
-
-                                            }
-
+                                            novels.setValue(novelList);
                                         }
                                     });
-                        return novels;
+
                         }
-    public MutableLiveData<List<Novel>> getAllNovelComplete(){
+
+                    }
+                });
+        return novels;
+    }
+
+    public MutableLiveData<List<Novel>> getAllNovelComplete() {
         MutableLiveData<List<Novel>> novels = new MutableLiveData<>(new ArrayList<>());
-        mFirestore.collection( "novel")
+        mFirestore.collection("novel")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -132,11 +133,11 @@ public class NovelRepository {
 //                           Log.d("ttan", "onEvent: "+ novel.toString());
                             String id = document.getId();
                             String gioiThieu = document.get("intro", String.class);
-                            DocumentReference image = document.get("image", DocumentReference.class);
+                            String image = document.get("image", String.class);
                             String name = document.get("name", String.class);
                             Boolean status = document.get("status", Boolean.class);
-                            DocumentReference author = document.get("author",DocumentReference.class);
-                            Novel novel = new Novel(id, name,gioiThieu, image, author, status);
+                            DocumentReference author = document.get("author", DocumentReference.class);
+                            Novel novel = new Novel(id, name, gioiThieu, image, author, status);
                             document.getReference().collection("chapter")
                                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                                         @Override
@@ -150,7 +151,7 @@ public class NovelRepository {
                                                 Chapter chapter = new Chapter(id, name, content);
                                                 chapters.add(chapter);
                                             }
-                                            if(novel.getStatus() != false){
+                                            if (novel.getStatus() != false) {
                                                 novel.setChapters(chapters);
                                                 novelList.add(novel);
                                             }
@@ -163,9 +164,10 @@ public class NovelRepository {
                 });
         return novels;
     }
-    public MutableLiveData<List<Novel>> getAllNovel(){
+
+    public MutableLiveData<List<Novel>> getAllNovel() {
         MutableLiveData<List<Novel>> novels = new MutableLiveData<>(new ArrayList<>());
-        mFirestore.collection( "novel")
+        mFirestore.collection("novel")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -175,11 +177,11 @@ public class NovelRepository {
 //                           Log.d("ttan", "onEvent: "+ novel.toString());
                             String id = document.getId();
                             String gioiThieu = document.get("intro", String.class);
-                            DocumentReference image = document.get("image", DocumentReference.class);
+                            String image = document.get("image", String.class);
                             String name = document.get("name", String.class);
                             Boolean status = document.get("status", Boolean.class);
-                            DocumentReference author = document.get("author",DocumentReference.class);
-                            Novel novel = new Novel(id, name,gioiThieu, image, author, status);
+                            DocumentReference author = document.get("author", DocumentReference.class);
+                            Novel novel = new Novel(id, name, gioiThieu, image, author, status);
                             document.getReference().collection("chapter")
                                     .addSnapshotListener(new EventListener<QuerySnapshot>() {
                                         @Override
@@ -193,7 +195,7 @@ public class NovelRepository {
                                                 Chapter chapter = new Chapter(id, name, content);
                                                 chapters.add(chapter);
                                             }
-                                            if(novel.getStatus() != false){
+                                            if (novel.getStatus() != false) {
                                                 novel.setChapters(chapters);
                                                 novelList.add(novel);
                                             }
