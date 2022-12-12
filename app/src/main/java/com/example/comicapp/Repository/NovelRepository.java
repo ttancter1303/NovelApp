@@ -77,6 +77,7 @@ public class NovelRepository {
 //               });
 //        return novels;
 //    }
+    //cái hay sử dụng là allnovelv2
     public MutableLiveData<List<Novel>> getAllNovelv2(){
         MutableLiveData<List<Novel>> novels = new MutableLiveData<>(new ArrayList<>());
         mFirestore.collection( "novel")
