@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Novel {
     private String id;
-    private String title;
+    private String name;
     private String intro;
     private String image;
     private DocumentReference author;
@@ -17,17 +17,17 @@ public class Novel {
         this.chapters = chapters;
     }
 
-    public Novel(String id, String title, String image, Boolean status) {
+    public Novel(String id, String name, String image, Boolean status) {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.image = image;
         this.author = author;
         this.status = status;
     }
 
-    public Novel(String id, String title, String intro, String image, DocumentReference author, Boolean status) {
+    public Novel(String id, String name, String intro, String image, DocumentReference author, Boolean status) {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.intro = intro;
         this.image = image;
         this.author = author;
@@ -50,7 +50,7 @@ public class Novel {
     public String toString() {
         return "Novel{" +
                 "id='" + id + '\'' +
-                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
                 ", image='" + image + '\'' +
                 ", author='" + author + '\'' +
                 ", status=" + status +
@@ -66,12 +66,12 @@ public class Novel {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getname() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setname(String name) {
+        this.name = name;
     }
 
     public String getImage() {

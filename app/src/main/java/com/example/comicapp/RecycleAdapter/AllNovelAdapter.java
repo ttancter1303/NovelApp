@@ -28,8 +28,6 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
     List<Novel> mData = new ArrayList<>();
     FirebaseStorage storage;
 
-
-
     public void setData(List<Novel> data){
         mData = data;
         notifyDataSetChanged();
