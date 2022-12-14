@@ -59,6 +59,7 @@ public class HomeFragment extends Fragment {
                 public void onChanged(List<Novel> novels) {
                     for (Novel novel : novels) {
                         mAllNovelAdapter.setData(novels);
+                        homeReadHighestAdapter.setData(novels);
                     }
                 }
             });

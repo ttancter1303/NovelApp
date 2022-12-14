@@ -1,23 +1,13 @@
 package com.example.comicapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
-import androidx.navigation.NavInflater;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
-import com.example.comicapp.HistoryFragment.ComicDetailFragment;
-import com.example.comicapp.HistoryFragment.HistoryFragment;
-import com.example.comicapp.HomeFragment.HomeFragment;
-import com.example.comicapp.NotificationFragment.NotificationFragment;
-import com.example.comicapp.UserFragment.UserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;

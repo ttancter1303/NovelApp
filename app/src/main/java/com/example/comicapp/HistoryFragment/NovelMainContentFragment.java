@@ -20,7 +20,7 @@ import com.example.comicapp.databinding.FragmentComicDetailBinding;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-public class ComicDetailFragment extends Fragment {
+public class NovelMainContentFragment extends Fragment {
     Button mBtnReadComic;
     FragmentComicDetailBinding binding;
     @Override

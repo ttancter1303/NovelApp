@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.comicapp.HistoryFragment.ComicDetailFragment;
+import com.example.comicapp.HistoryFragment.NovelMainContentFragment;
 import com.example.comicapp.HistoryFragment.HistoryFragment;
 import com.example.comicapp.HomeFragment.HomeFragment;
 import com.example.comicapp.UserFragment.UserFragment;
@@ -25,7 +25,7 @@ public class MainAdapter extends FragmentStateAdapter {
                 return new HomeFragment();
             case 2:
 //                return new NotificationFragment();
-                return new ComicDetailFragment();
+                return new NovelMainContentFragment();
             case 3:
                 return new UserFragment();
             default:

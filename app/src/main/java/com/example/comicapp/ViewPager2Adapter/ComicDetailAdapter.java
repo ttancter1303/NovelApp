@@ -2,15 +2,14 @@ package com.example.comicapp.ViewPager2Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.comicapp.HistoryFragment.ComicDetailFragment;
+import com.example.comicapp.HistoryFragment.NovelMainContentFragment;
 import com.example.comicapp.HistoryFragment.ComicVolFragment;
 import com.example.comicapp.HistoryFragment.DetailComicSubFragment;
 
 public class ComicDetailAdapter extends FragmentStateAdapter {
-    public ComicDetailAdapter(@NonNull ComicDetailFragment fragmentActivity) {
+    public ComicDetailAdapter(@NonNull NovelMainContentFragment fragmentActivity) {
         super(fragmentActivity);
     }
 

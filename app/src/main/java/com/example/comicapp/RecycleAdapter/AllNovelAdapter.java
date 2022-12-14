@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.comicapp.HistoryFragment.ComicDetailFragment;
+import com.example.comicapp.HistoryFragment.NovelMainContentFragment;
 import com.example.comicapp.R;
 import com.example.comicapp.data.Novel;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -32,6 +32,13 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
     FirebaseStorage storage;
     final static String KEY_NOVEL ="com.example.comicapp.RecycleAdapter.NOVEL";
 
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+
+    }
+
+    private ISendDataLister mISendDataLister;
     public void setData(List<Novel> data){
         mData = data;
         notifyDataSetChanged();
@@ -66,8 +73,9 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
                 if(mOnItemClickListener != null){
                     mOnItemClickListener.onClick(itemView,mData.get(getLayoutPosition()));
                     Intent intent = new Intent();
-                    intent.setClass(itemView.getContext(), ComicDetailFragment.class);
+                    intent.setClass(itemView.getContext(), NovelMainContentFragment.class);
                     intent.putExtra(KEY_NOVEL, (Serializable) mData.get(getLayoutPosition()));
+                    sendDataToRecommendFragment(,mData.get(getLayoutPosition()).getname(),mData.get(getLayoutPosition()).getIntro());
                 }
 
             });
@@ -94,13 +102,24 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
             }
         }
     }
+
+
+
     private OnItemClickListener mOnItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener){
         mOnItemClickListener = onItemClickListener;
     }
+    private void sendDataToRecommendFragment() {
+        String id = mData
 
+        mISendDataLister.SendData(id,name,intro);
+    }
+    public interface ISendDataLister{
+        void SendData(String id, String name, String intro);
+    }
     public interface OnItemClickListener {
         public void onClick(View view, Novel novel);
     }
+
 }

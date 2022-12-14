@@ -2,11 +2,9 @@ package com.example.comicapp.ViewPager2Adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.comicapp.HistoryFragment.CategoryFragment;
-import com.example.comicapp.HistoryFragment.ComicDetailFragment;
 import com.example.comicapp.HistoryFragment.HistoryFragment;
 import com.example.comicapp.HistoryFragment.SubHistoryRecyclerFragment;
 

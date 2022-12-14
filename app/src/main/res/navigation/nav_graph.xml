@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/comicDetailFragment"
-        android:name="com.example.comicapp.HistoryFragment.ComicDetailFragment"
+        android:name="com.example.comicapp.HistoryFragment.NovelMainContentFragment"
         android:label="ComicDetailFragment" />
     <fragment
         android:id="@+id/readNovelFragment"
