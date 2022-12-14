@@ -1,5 +1,6 @@
 package com.example.comicapp.RecycleAdapter;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.comicapp.HistoryFragment.ComicDetailFragment;
 import com.example.comicapp.R;
 import com.example.comicapp.data.Novel;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,12 +23,14 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHolder>{
     List<Novel> mData = new ArrayList<>();
     FirebaseStorage storage;
+    final static String KEY_NOVEL ="com.example.comicapp.RecycleAdapter.NOVEL";
 
     public void setData(List<Novel> data){
         mData = data;
@@ -58,6 +62,15 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mImage = itemView.findViewById(R.id.img_newComic);
+            itemView.setOnClickListener(v->{
+                if(mOnItemClickListener != null){
+                    mOnItemClickListener.onClick(itemView,mData.get(getLayoutPosition()));
+                    Intent intent = new Intent();
+                    intent.setClass(itemView.getContext(), ComicDetailFragment.class);
+                    intent.putExtra(KEY_NOVEL, (Serializable) mData.get(getLayoutPosition()));
+                }
+
+            });
         }
         public void bindView(Novel novel){
             mStorageReference = storage.getReference(novel.getImage());
@@ -80,5 +93,14 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
                 e.printStackTrace();
             }
         }
+    }
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        mOnItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        public void onClick(View view, Novel novel);
     }
 }

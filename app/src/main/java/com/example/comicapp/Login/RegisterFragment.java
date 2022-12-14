@@ -110,9 +110,6 @@ public class RegisterFragment extends Fragment {
                     .document(firebaseUser.getUid())
                     .set(dataMap);
         }
-
-
-
     }
 
 

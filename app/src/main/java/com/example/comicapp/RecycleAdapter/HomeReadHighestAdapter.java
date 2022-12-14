@@ -61,6 +61,9 @@ public class HomeReadHighestAdapter extends RecyclerView.Adapter<HomeReadHighest
             super(itemView);
             mImage = itemView.findViewById(R.id.imageView3);
             mTxtHeader = itemView.findViewById(R.id.textView);
+            mImage.setOnClickListener(v->{
+
+            });
 
         }
         public void bindView(@NonNull Novel novel){
