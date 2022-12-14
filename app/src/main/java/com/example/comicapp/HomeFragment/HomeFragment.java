@@ -1,6 +1,7 @@
 package com.example.comicapp.HomeFragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.comicapp.ComicFragment.NewComicFragment;
 import com.example.comicapp.R;
 import com.example.comicapp.RecycleAdapter.HomeReadHighestAdapter;
 import com.example.comicapp.RecycleAdapter.AllNovelAdapter;
@@ -30,6 +32,7 @@ public class HomeFragment extends Fragment {
     RecyclerView mRecyclerViewReadHighest;
     AllNovelAdapter mAllNovelAdapter;
     HomeReadHighestAdapter homeReadHighestAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -64,6 +67,24 @@ public class HomeFragment extends Fragment {
                 }
             });
         }
+        mAllNovelAdapter.setOnItemClickListener(new AllNovelAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, Novel novel) {
+                Intent intent = new Intent(requireContext(), NewComicFragment.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", novel.getId());
+                bundle.putString("name",novel.getname());
+                bundle.putString("intro",novel.getIntro());
+                bundle.putString("image",novel.getImage());
+
+                intent.putExtra("bundle",bundle);
+                startActivity(intent);
+
+            }
+        });
+
 
     }
+
+
 }

@@ -30,19 +30,17 @@ import java.util.List;
 public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHolder>{
     List<Novel> mData = new ArrayList<>();
     FirebaseStorage storage;
-    final static String KEY_NOVEL ="com.example.comicapp.RecycleAdapter.NOVEL";
 
-    @Override
-    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
+//    private ISendDataLister mISendDataLister;
 
-    }
 
-    private ISendDataLister mISendDataLister;
+
     public void setData(List<Novel> data){
         mData = data;
         notifyDataSetChanged();
     }
+
+
 
     @NonNull
     @Override
@@ -72,10 +70,7 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
             itemView.setOnClickListener(v->{
                 if(mOnItemClickListener != null){
                     mOnItemClickListener.onClick(itemView,mData.get(getLayoutPosition()));
-                    Intent intent = new Intent();
-                    intent.setClass(itemView.getContext(), NovelMainContentFragment.class);
-                    intent.putExtra(KEY_NOVEL, (Serializable) mData.get(getLayoutPosition()));
-                    sendDataToRecommendFragment(,mData.get(getLayoutPosition()).getname(),mData.get(getLayoutPosition()).getIntro());
+//                    sendDataToRecommendFragment();
                 }
 
             });
@@ -107,19 +102,25 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
 
     private OnItemClickListener mOnItemClickListener;
 
+
     public void setOnItemClickListener(OnItemClickListener onItemClickListener){
         mOnItemClickListener = onItemClickListener;
     }
-    private void sendDataToRecommendFragment() {
-        String id = mData
-
-        mISendDataLister.SendData(id,name,intro);
-    }
-    public interface ISendDataLister{
-        void SendData(String id, String name, String intro);
-    }
+//    private void sendDataToRecommendFragment() {
+//        String id = mData.get(getItemCount()).getId();
+//        String name = mData.get(getItemCount()).getname();
+//        String intro = mData.get(getItemCount()).getIntro();
+//        String image = mData.get(getItemCount()).getImage();
+//        Log.d("ttan", "sendDataToRecommendFragment: "+ name);
+//
+//        mOnItemClickListener.SendData(id,name,intro,image);
+//    }
+//    public interface ISendDataLister{
+//        void SendData(String id, String name, String intro,String image);
+//    }
     public interface OnItemClickListener {
-        public void onClick(View view, Novel novel);
+        void onClick(View view, Novel novel);
+//        void SendData(String id, String name, String intro,String image);
     }
 
 }
