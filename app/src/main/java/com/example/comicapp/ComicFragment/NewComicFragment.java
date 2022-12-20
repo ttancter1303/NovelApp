@@ -62,11 +62,7 @@ public class NewComicFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Intent intent = new Intent();
 
-        Bundle bundle = intent.getBundleExtra("bundle");
-        String id = bundle.getString("id");
-        String name = bundle.getString("name");
-        String subTitle = bundle.getString("intro");
-        String image = bundle.getString("image");
+
 
         mHeader = binding.txtHeader;
         mSubTitle = binding.txtSubtitle;
@@ -74,35 +70,9 @@ public class NewComicFragment extends Fragment {
         mAddToLibrary = binding.btnAddtoLibrary;
         mImage = binding.imgComic;
 
-        storageRef = FirebaseStorage.getInstance().getReference(image);
-        try {
-            File file = File.createTempFile("temp",".jpg");
-            storageRef.getFile(file)
-                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-                            mImage.setImageBitmap(bitmap);
-                        }
-
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.d("ttan", "onFailure: "+e);
-                        }
-                    });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        mHeader.setText(name);
-        mSubTitle.setText(subTitle);
-
-
         NavController navController =  Navigation.findNavController(requireActivity(),R.id.fragment_host_container);
         mHeader.setOnClickListener(v->{
             if(mOnItemClickListener != null){
-//                mOnItemClickListener.onClick(itemView, getByIndex(mData, getLayoutPosition()));
             }
             navController.navigate(R.id.comicDetailFragment);
         });

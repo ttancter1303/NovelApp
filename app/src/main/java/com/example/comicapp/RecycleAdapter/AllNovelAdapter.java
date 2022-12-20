@@ -31,17 +31,10 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
     List<Novel> mData = new ArrayList<>();
     FirebaseStorage storage;
 
-//    private ISendDataLister mISendDataLister;
-
-
-
     public void setData(List<Novel> data){
         mData = data;
         notifyDataSetChanged();
     }
-
-
-
     @NonNull
     @Override
     public AllNovelAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -70,7 +63,6 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
             itemView.setOnClickListener(v->{
                 if(mOnItemClickListener != null){
                     mOnItemClickListener.onClick(itemView,mData.get(getLayoutPosition()));
-//                    sendDataToRecommendFragment();
                 }
 
             });
@@ -106,21 +98,8 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.ViewHo
     public void setOnItemClickListener(OnItemClickListener onItemClickListener){
         mOnItemClickListener = onItemClickListener;
     }
-//    private void sendDataToRecommendFragment() {
-//        String id = mData.get(getItemCount()).getId();
-//        String name = mData.get(getItemCount()).getname();
-//        String intro = mData.get(getItemCount()).getIntro();
-//        String image = mData.get(getItemCount()).getImage();
-//        Log.d("ttan", "sendDataToRecommendFragment: "+ name);
-//
-//        mOnItemClickListener.SendData(id,name,intro,image);
-//    }
-//    public interface ISendDataLister{
-//        void SendData(String id, String name, String intro,String image);
-//    }
     public interface OnItemClickListener {
         void onClick(View view, Novel novel);
-//        void SendData(String id, String name, String intro,String image);
     }
 
 }

@@ -7,7 +7,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +23,7 @@ import com.example.comicapp.ComicFragment.NewComicFragment;
 import com.example.comicapp.R;
 import com.example.comicapp.RecycleAdapter.HomeReadHighestAdapter;
 import com.example.comicapp.RecycleAdapter.AllNovelAdapter;
+import com.example.comicapp.Repository.ViewModel.ItemClickAllNovelViewModel;
 import com.example.comicapp.Repository.ViewModel.NovelViewModel;
 import com.example.comicapp.data.Novel;
 
@@ -27,11 +31,14 @@ import java.util.List;
 
 
 public class HomeFragment extends Fragment {
+    private ItemClickAllNovelViewModel mModel;
     NovelViewModel mViewModel;
     RecyclerView mRecyclerViewAllNovel;
     RecyclerView mRecyclerViewReadHighest;
     AllNovelAdapter mAllNovelAdapter;
     HomeReadHighestAdapter homeReadHighestAdapter;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,23 +74,20 @@ public class HomeFragment extends Fragment {
                 }
             });
         }
+
+        mModel = new ViewModelProvider(this).get(ItemClickAllNovelViewModel.class);
+        mModel.getSelectedItem().observe(getViewLifecycleOwner(), item -> {
+
+        });
+
         mAllNovelAdapter.setOnItemClickListener(new AllNovelAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Novel novel) {
-                Intent intent = new Intent(requireContext(), NewComicFragment.class);
-                Bundle bundle = new Bundle();
-                bundle.putString("id", novel.getId());
-                bundle.putString("name",novel.getname());
-                bundle.putString("intro",novel.getIntro());
-                bundle.putString("image",novel.getImage());
-
-                intent.putExtra("bundle",bundle);
-                startActivity(intent);
-
+                mModel.getSelectedItem().observe(getViewLifecycleOwner(), item -> {
+                    item.setChapters(novel.getChapters());
+                });
             }
         });
-
-
     }
 
 

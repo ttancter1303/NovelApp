@@ -74,6 +74,7 @@ public class ChangeProfileFragment extends Fragment {
         mUserPhone = binding.edtUserPhone;
         mUserNote = binding.edtUserNote;
 
+        mUserEmail.setText(mFirebaseUser.getEmail());
         String user = mFirebaseAuth.getUid();
         DocumentReference docRef = db.collection("user").document(user);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

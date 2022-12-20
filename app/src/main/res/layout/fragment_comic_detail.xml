@@ -22,7 +22,8 @@
                 android:layout_width="150dp"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="4dp"
+                android:padding="10dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/slime300"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -45,13 +46,13 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/textTheLoai"
+                    android:id="@+id/txtType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:background="@drawable/border_radius"
                     android:gravity="center"
-                    android:text="dã sử"
+                    android:text="Giả tưởng"
                     android:textColor="@color/white"
 
                     />
@@ -76,7 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="đánh giá"
+                    android:text=""
                     android:textSize="9dp" />
 
             </LinearLayout>
