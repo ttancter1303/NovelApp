@@ -101,44 +101,74 @@ public class NovelMainContentFragment extends Fragment {
 
         Bundle bundle = requireArguments();
         String id = bundle.getString("id");
-        DocumentReference docRef = db.collection("novel").document(id);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
 
-                    if (document.exists()) {
-                        Log.d("ttan", "DocumentSnapshot data: " + document.getData());
-                        mHeader.setText(document.get("name",String.class));
-                        mAuthor.setText(document.get("author",String.class));
-                        mStorageReference = storage.getReference(document.get("image",String.class));
-                        try {
-                            final File localFile = File.createTempFile("temp","jpg");
-                            mStorageReference.getFile(localFile)
-                                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                                            mImage.setImageBitmap(bitmap);
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.d("PhucDVb", "onFailure: ", e);
-                                        }
-                                    });
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Log.d("ttan", "No such document");
-                    }
-                } else {
-                    Log.d("ttan", "get failed with ", task.getException());
+        DocumentReference docRef = db.collection("novel").document(id);
+        docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Novel novel = documentSnapshot.toObject(Novel.class);
+                mHeader.setText(novel.getname());
+                mAuthor.setText("Tác giả: "+(CharSequence) novel.getAuthor());
+                mStorageReference = storage.getReference(novel.getImage());
+                try {
+                    final File localFile = File.createTempFile("temp","jpg");
+                    mStorageReference.getFile(localFile)
+                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                    mImage.setImageBitmap(bitmap);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("ttan", "onFailure: ", e);
+                                }
+                            });
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         });
+//
+//        DocumentReference docRef = db.collection("novel").document(id);
+//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    DocumentSnapshot document = task.getResult();
+//
+//                    if (document.exists()) {
+//                        Log.d("ttan", "DocumentSnapshot data: " + document.getData());
+//                        mHeader.setText(document.get("name",String.class));
+//                        mAuthor.setText(document.get("author",String.class));
+//                        mStorageReference = storage.getReference(document.get("image",String.class));
+//                        try {
+//                            final File localFile = File.createTempFile("temp","jpg");
+//                            mStorageReference.getFile(localFile)
+//                                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//                                        @Override
+//                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+//                                            mImage.setImageBitmap(bitmap);
+//                                        }
+//                                    }).addOnFailureListener(new OnFailureListener() {
+//                                        @Override
+//                                        public void onFailure(@NonNull Exception e) {
+//                                            Log.d("PhucDVb", "onFailure: ", e);
+//                                        }
+//                                    });
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                    } else {
+//                        Log.d("ttan", "No such document");
+//                    }
+//                } else {
+//                    Log.d("ttan", "get failed with ", task.getException());
+//                }
+//            }
+//        });
 
     }
 }

@@ -13,15 +13,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.comicapp.R;
-import com.example.comicapp.RecycleAdapter.ComicDetailRVAdapter;
 import com.example.comicapp.RecycleAdapter.SameAuthorAdapter;
 
-public class DetailComicSubFragment extends Fragment {
+public class NovelContentFragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_comic_sub, container, false);
+        return inflater.inflate(R.layout.fragment_novel_content1, container, false);
     }
 
     @Override

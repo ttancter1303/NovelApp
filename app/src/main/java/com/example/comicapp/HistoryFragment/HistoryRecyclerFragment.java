@@ -5,10 +5,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,16 +21,16 @@ import com.example.comicapp.RecycleAdapter.HistoryRecycleAdapter;
 import com.example.comicapp.Repository.ViewModel.NovelViewModel;
 import com.example.comicapp.data.Novel;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class SubHistoryRecyclerFragment extends Fragment {
+public class HistoryRecyclerFragment extends Fragment {
     NovelViewModel mViewModel;
+    NavController mController;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_sub_history_recycler, container, false);
+        return inflater.inflate(R.layout.fragment_history_recycler, container, false);
     }
 
     @Override
@@ -40,7 +40,15 @@ public class SubHistoryRecyclerFragment extends Fragment {
         HistoryRecycleAdapter adapter = new HistoryRecycleAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        mController = Navigation.findNavController(requireActivity(), R.id.fragment_host_container);
+        adapter.setOnItemClickListener(new HistoryRecycleAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, Novel novel) {
+                Bundle bundle = new Bundle();
+                bundle.putString("id",novel.getId());
+                mController.navigate(R.id.comicDetailFragment,bundle);
+            }
+        });
 
         mViewModel = new ViewModelProvider(this).get(NovelViewModel.class);
         if(mViewModel.getAllNovel() != null){

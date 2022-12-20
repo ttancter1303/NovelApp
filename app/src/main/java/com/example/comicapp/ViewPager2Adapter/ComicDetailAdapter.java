@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.comicapp.HistoryFragment.NovelMainContentFragment;
 import com.example.comicapp.HistoryFragment.ComicVolFragment;
-import com.example.comicapp.HistoryFragment.DetailComicSubFragment;
+import com.example.comicapp.HistoryFragment.NovelContentFragment1;
 
 public class ComicDetailAdapter extends FragmentStateAdapter {
     public ComicDetailAdapter(@NonNull NovelMainContentFragment fragmentActivity) {
@@ -18,11 +18,11 @@ public class ComicDetailAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return new DetailComicSubFragment();
+                return new NovelContentFragment1();
             case 1:
                 return new ComicVolFragment();
             default:
-                return new DetailComicSubFragment();
+                return new NovelContentFragment1();
         }
     }
 

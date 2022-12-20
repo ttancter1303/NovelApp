@@ -6,7 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.comicapp.HistoryFragment.CategoryFragment;
 import com.example.comicapp.HistoryFragment.HistoryFragment;
-import com.example.comicapp.HistoryFragment.SubHistoryRecyclerFragment;
+import com.example.comicapp.HistoryFragment.HistoryRecyclerFragment;
 
 public class HistoryViewPager2Adapter extends FragmentStateAdapter {
     public HistoryViewPager2Adapter(@NonNull HistoryFragment fragmentActivity) {
@@ -18,12 +18,12 @@ public class HistoryViewPager2Adapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return new SubHistoryRecyclerFragment();
+                return new HistoryRecyclerFragment();
             case 1:
 //                return new ComicDetailFragment();
                 return new CategoryFragment();
             default:
-                return new SubHistoryRecyclerFragment();
+                return new HistoryRecyclerFragment();
         }
     }
 
