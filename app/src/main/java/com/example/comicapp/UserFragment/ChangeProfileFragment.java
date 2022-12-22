@@ -86,9 +86,10 @@ public class ChangeProfileFragment extends Fragment {
                         Log.d("ttan", "DocumentSnapshot data: " + document.getData());
                         mUserName.setText(document.get("name").toString());
                         mUserEmail.setText(document.get("email").toString());
-                        mUserBirth.setText(document.get("birth").toString());
-                        mUserPhone.setText(document.get("phone").toString());
-                        mUserNote.setText(document.get("note").toString());
+                        // @TODO những thuộc tính này chưa thấy có đủ trên firebase
+//                        mUserBirth.setText(document.get("birth").toString());
+//                        mUserPhone.setText(document.get("phone").toString());
+//                        mUserNote.setText(document.get("note").toString());
 
 
                     } else {

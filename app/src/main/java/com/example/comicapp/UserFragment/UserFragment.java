@@ -57,7 +57,7 @@ public class UserFragment extends Fragment {
         NavController navController = Navigation.findNavController(requireActivity(),R.id.fragment_host_container);
         txtChangeProfile.setOnClickListener(v->{
             navController.popBackStack();
-            navController.navigate(R.id.action_userFragment_to_changeProfileFragment);
+            navController.navigate(R.id.changeProfileFragment);
         });
         txtSetting.setOnClickListener(v->{
             navController.popBackStack();
