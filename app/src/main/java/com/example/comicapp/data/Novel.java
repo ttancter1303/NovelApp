@@ -46,6 +46,16 @@ public class Novel {
         return chapters;
     }
 
+    public Novel(String id, String name, String intro, String image, DocumentReference author, Boolean status, List<Chapter> chapters) {
+        this.id = id;
+        this.name = name;
+        this.intro = intro;
+        this.image = image;
+        this.author = author;
+        this.status = status;
+        this.chapters = chapters;
+    }
+
     @Override
     public String toString() {
         return "Novel{" +

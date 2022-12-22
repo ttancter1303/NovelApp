@@ -54,6 +54,8 @@ public class NovelMainContentFragment extends Fragment {
     Button mBtnReadComic;
     Button mButtonAddLibrary;
 
+    public static Novel novel;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -106,7 +108,8 @@ public class NovelMainContentFragment extends Fragment {
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Novel novel = documentSnapshot.toObject(Novel.class);
+                Log.d("ttan", "onSuccess: "+documentSnapshot.toString());
+                novel = documentSnapshot.toObject(Novel.class);
                 mHeader.setText(novel.getname());
                 mAuthor.setText("Tác giả: "+(CharSequence) novel.getAuthor());
                 mStorageReference = storage.getReference(novel.getImage());
