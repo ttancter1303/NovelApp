@@ -17,6 +17,9 @@ public class Novel {
         this.chapters = chapters;
     }
 
+    public Novel() {
+    }
+
     public Novel(String id, String name, String image, Boolean status) {
         this.id = id;
         this.name = name;

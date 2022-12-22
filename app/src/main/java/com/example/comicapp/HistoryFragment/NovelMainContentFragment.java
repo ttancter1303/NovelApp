@@ -110,8 +110,14 @@ public class NovelMainContentFragment extends Fragment {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 Log.d("ttan", "onSuccess: "+documentSnapshot.toString());
                 novel = documentSnapshot.toObject(Novel.class);
+                novel.setId(id);
                 mHeader.setText(novel.getname());
-                mAuthor.setText("Tác giả: "+(CharSequence) novel.getAuthor());
+                novel.getAuthor().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        mAuthor.setText("Tác giả: "+ documentSnapshot.get("name"));
+                    }
+                });
                 mStorageReference = storage.getReference(novel.getImage());
                 try {
                     final File localFile = File.createTempFile("temp","jpg");
