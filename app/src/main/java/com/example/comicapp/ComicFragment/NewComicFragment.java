@@ -71,18 +71,25 @@ public class NewComicFragment extends Fragment {
         mImage = binding.imgComic;
 
         NavController navController =  Navigation.findNavController(requireActivity(),R.id.fragment_host_container);
+
+        // @TODO Thay thanh id muon truyen qua comicDetailFragment
+        Novel novel = new Novel();
+        novel.setId("7RijD0lXUf6zZUHsTqJW");
+        Bundle bundle = new Bundle();
+        bundle.putString("id", novel.getId());
+
         mHeader.setOnClickListener(v->{
             if(mOnItemClickListener != null){
             }
-            navController.navigate(R.id.comicDetailFragment);
+            navController.navigate(R.id.comicDetailFragment, bundle);
         });
 
         mRead.setOnClickListener(v->{
-            navController.navigate(R.id.comicDetailFragment);
+            navController.navigate(R.id.comicDetailFragment, bundle);
         });
 
         mImage.setOnClickListener(v->{
-            navController.navigate(R.id.comicDetailFragment);
+            navController.navigate(R.id.comicDetailFragment, bundle);
         });
 
     }
