@@ -18,12 +18,12 @@
         android:layout_height="wrap_content"
         android:text="Sửa hồ sơ"
         style="@style/user_text_option"/>
-    <TextView
-        android:id="@+id/txt_setting"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/user_text_option"
-        android:text="Cài đặt"/>
+<!--    <TextView-->
+<!--        android:id="@+id/txt_setting"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        style="@style/user_text_option"-->
+<!--        android:text="Cài đặt"/>-->
     <TextView
         android:id="@+id/txt_change_password"
         android:layout_width="match_parent"

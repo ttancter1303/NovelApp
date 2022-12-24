@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
                     navController.popBackStack();
                     navController.navigate(R.id.homeFragment);
                     break;
-                case R.id.action_notification:
-                    navController.popBackStack();
-                    navController.navigate(R.id.notificationFragment);
-                    break;
+//                case R.id.action_notification:
+//                    navController.popBackStack();
+//                    navController.navigate(R.id.notificationFragment);
+//                    break;
                 case R.id.action_user:
                     navController.popBackStack();
                     navController.navigate(R.id.userFragment);

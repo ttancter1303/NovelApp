@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Log;
@@ -20,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.comicapp.R;
+import com.example.comicapp.RecycleAdapter.VolumeAdapter;
 import com.example.comicapp.ViewPager2Adapter.ComicDetailAdapter;
 import com.example.comicapp.data.Novel;
 import com.example.comicapp.databinding.FragmentComicDetailBinding;
@@ -50,9 +53,11 @@ public class NovelMainContentFragment extends Fragment {
     ImageView mImage;
     TextView mHeader;
     TextView mAuthor;
+    TextView mIntro;
     TextView mNovelType;
     Button mBtnReadComic;
     Button mButtonAddLibrary;
+    TextView mStatus;
 
     public static Novel novel;
 
@@ -74,28 +79,30 @@ public class NovelMainContentFragment extends Fragment {
         mAuthor = binding.textAuthor;
         mButtonAddLibrary = binding.btnAddToLiberry;
         mBtnReadComic = binding.btnReadComic;
-
+        mNovelType = binding.typeNovel;
+        mIntro = binding.txtIntro;
+        mStatus = binding.txtStatus;
 
 
         NavController navController = Navigation.findNavController(requireActivity(),R.id.fragment_host_container);
-        ViewPager2 viewPager2 = view.findViewById(R.id.bodyComicDetailViewPager2);
-        TabLayout tabLayout = view.findViewById(R.id.tabLayoutComicDetail);
-        ComicDetailAdapter adapter = new ComicDetailAdapter(this);
-        viewPager2.setAdapter(adapter);
-        TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position){
-                    case 0:
-                        tab.setText("Giới thiệu");
-                        break;
-                    case 1:
-                        tab.setText("Danh sách chương");
-                        break;
-                }
-            }
-        });
-        mediator.attach();
+//        ViewPager2 viewPager2 = view.findViewById(R.id.bodyComicDetailViewPager2);
+//        TabLayout tabLayout = view.findViewById(R.id.tabLayoutComicDetail);
+//        ComicDetailAdapter adapter = new ComicDetailAdapter(this);
+//        viewPager2.setAdapter(adapter);
+//        TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+//            @Override
+//            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+//                switch (position){
+//                    case 0:
+//                        tab.setText("Giới thiệu");
+//                        break;
+//                    case 1:
+//                        tab.setText("Danh sách chương");
+//                        break;
+//                }
+//            }
+//        });
+//        mediator.attach();
         mBtnReadComic = binding.btnReadComic;
         mBtnReadComic.setOnClickListener(v->{
            navController.navigate(R.id.readNovelFragment);
@@ -112,6 +119,15 @@ public class NovelMainContentFragment extends Fragment {
                 novel = documentSnapshot.toObject(Novel.class);
                 novel.setId(id);
                 mHeader.setText(novel.getname());
+                mIntro.setText(novel.getIntro());
+                mNovelType.setText(" Thể loại: " + novel.getType());
+                if(novel.getStatus() != false){
+                    mStatus.setText("Đang tiến hành");
+                }else{
+                    mStatus.setText("Chưa hoàn thành");
+                }
+
+
                 novel.getAuthor().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -139,6 +155,10 @@ public class NovelMainContentFragment extends Fragment {
                 }
             }
         });
+        RecyclerView recyclerView = view.findViewById(R.id.RecycleViewVolume);
+        VolumeAdapter adapter = new VolumeAdapter();
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 //
 //        DocumentReference docRef = db.collection("novel").document(id);
 //        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

@@ -9,9 +9,41 @@ public class Novel {
     private String name;
     private String intro;
     private String image;
+    private String type;
     private DocumentReference author;
     private Boolean status;
     private List<Chapter> chapters;
+
+
+    public Novel(String id, String name, String intro, String image, String type, DocumentReference author, Boolean status, List<Chapter> chapters) {
+        this.id = id;
+        this.name = name;
+        this.intro = intro;
+        this.image = image;
+        this.type = type;
+        this.author = author;
+        this.status = status;
+        this.chapters = chapters;
+    }
+
+    public Novel(String id, String name, String intro, String image, String type, DocumentReference author, Boolean status) {
+        this.id = id;
+        this.name = name;
+        this.intro = intro;
+        this.image = image;
+        this.type = type;
+        this.author = author;
+        this.status = status;
+    }
+
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public void setChapters(List<Chapter> chapters){
         this.chapters = chapters;
@@ -23,15 +55,6 @@ public class Novel {
     public Novel(String id, String name, String image, Boolean status) {
         this.id = id;
         this.name = name;
-        this.image = image;
-        this.author = author;
-        this.status = status;
-    }
-
-    public Novel(String id, String name, String intro, String image, DocumentReference author, Boolean status) {
-        this.id = id;
-        this.name = name;
-        this.intro = intro;
         this.image = image;
         this.author = author;
         this.status = status;

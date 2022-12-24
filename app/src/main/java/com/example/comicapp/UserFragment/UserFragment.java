@@ -50,7 +50,7 @@ public class UserFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         txtChangeProfile = binding.txtChangeProfile;
-        txtSetting = binding.txtSetting;
+//        txtSetting = binding.txtSetting;
         txtChangePassword = binding.txtChangePassword;
         txtLogout = binding.txtLogout;
 
@@ -59,11 +59,11 @@ public class UserFragment extends Fragment {
             navController.popBackStack();
             navController.navigate(R.id.changeProfileFragment);
         });
-        txtSetting.setOnClickListener(v->{
-            navController.popBackStack();
-            navController.navigate(R.id.action_userFragment_to_settingFragment);
-//            navController.navigate(R.id.settingsFragment);
-        });
+//        txtSetting.setOnClickListener(v->{
+//            navController.popBackStack();
+//            navController.navigate(R.id.action_userFragment_to_settingFragment);
+////            navController.navigate(R.id.settingsFragment);
+//        });
         txtChangePassword.setOnClickListener(v->{
             navController.navigate(R.id.action_userFragment_to_forgotPasswordFragment);
         });
