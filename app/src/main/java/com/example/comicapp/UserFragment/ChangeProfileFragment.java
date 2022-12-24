@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.comicapp.databinding.FragmentChangeProfileBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,6 +26,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -78,8 +80,6 @@ public class ChangeProfileFragment extends Fragment {
         String user = mFirebaseAuth.getUid();
         DocumentReference docRef = db.collection("user").document(user);
 
-        docRef.set("").addOnCompleteListener()
-
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -105,55 +105,59 @@ public class ChangeProfileFragment extends Fragment {
         });
 
         mUserEmail.setText(mFirebaseUser.getEmail());
-
-
-
-//        docRef = db.collection("user").document(user);
-//        docRef.update("email",mUserEmail.getText().toString()
-//        ,"name",mUserName.getText().toString()
-//        ,"birth",mUserBirth.getText().toString()
-//        ,"phone",mUserPhone.getText().toString()
-//        ,"note",mUserNote.getText().toString());
-
-
-
-
-//        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-//            @Override
-//            public void onSuccess(DocumentSnapshot documentSnapshot) {
-////                City city = documentSnapshot.toObject(City.class);
-//                changeUserFromDB(mUserEmail.getText().toString()
-//                        ,mUserName.getText().toString()
-//                        ,mUserBirth.getText().toString()
-//                        ,mUserPhone.getText().toString()
-//                        ,mUserNote.getText().toString()
-//                        );
-//            }
-//        });
-
-//        db.collection("user")
-//                .document(user)
-//                .addSnapshotListener(new OnSuccessListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-//
-//                    }
-//                })
+        mBtnAccept.setOnClickListener(v->{
+            changeUserFromDB(mUserEmail.getText().toString(),mUserName.getText().toString(),mUserBirth.getText().toString(),mUserPhone.getText().toString(),mUserNote.getText().toString(),user);
+        });
 
     }
 
-    public void changeUserFromDB(String Email,String Name,String Birth, String Phone, String Note){
+    public void changeUserFromDB(String Email,String Name,String Birth, String Phone, String Note,String user){
         Map<String,Object> dataMap = new HashMap<>();
-        dataMap.put("email",Email);
+//        dataMap.put("email",Email);
         dataMap.put("name",Name);
-        dataMap.put("birth",Birth);
-        dataMap.put("Phone",Phone);
-        dataMap.put("Note", Note);
-        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-        if(firebaseUser != null){
-            db.collection("user")
-                    .document(firebaseUser.getUid())
-                    .set(dataMap);
-        }
+//        dataMap.put("birth",Birth);
+//        dataMap.put("Phone",Phone);
+//        dataMap.put("Note", Note);
+        db.collection("user")
+                .whereEqualTo("name",Name)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful() && !task.getResult().isEmpty()){
+                            DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
+                            db.collection("user")
+                                    .document(user)
+                                    .update(dataMap)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(requireContext(), "Update thành công", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(requireContext(), "Update thất bại", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+                        }
+                        else{
+                            Toast.makeText(requireContext(), "Update fail", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+//        Map<String,Object> dataMap = new HashMap<>();
+//        dataMap.put("email",Email);
+//        dataMap.put("name",Name);
+//        dataMap.put("birth",Birth);
+//        dataMap.put("Phone",Phone);
+//        dataMap.put("Note", Note);
+//        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+//        if(firebaseUser != null){
+//            db.collection("user")
+//                    .document(firebaseUser.getUid())
+//                    .set(dataMap);
+//        }
     }
 }
