@@ -12,6 +12,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +23,7 @@ import android.view.ViewGroup;
 
 import com.example.comicapp.ComicFragment.NewComicFragment;
 import com.example.comicapp.R;
+import com.example.comicapp.RecycleAdapter.HistoryRecycleAdapter;
 import com.example.comicapp.RecycleAdapter.HomeReadHighestAdapter;
 import com.example.comicapp.RecycleAdapter.AllNovelAdapter;
 import com.example.comicapp.Repository.ViewModel.ItemClickAllNovelViewModel;
@@ -37,6 +40,7 @@ public class HomeFragment extends Fragment {
     RecyclerView mRecyclerViewReadHighest;
     AllNovelAdapter mAllNovelAdapter;
     HomeReadHighestAdapter homeReadHighestAdapter;
+    NavController mController;
 
 
 
@@ -52,6 +56,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mController = Navigation.findNavController(requireActivity(), R.id.fragment_host_container);
         mRecyclerViewAllNovel = view.findViewById(R.id.rev_newComic);
         mAllNovelAdapter = new AllNovelAdapter();
         mRecyclerViewAllNovel.setAdapter(mAllNovelAdapter);
@@ -61,6 +66,14 @@ public class HomeFragment extends Fragment {
         homeReadHighestAdapter = new HomeReadHighestAdapter();
         mRecyclerViewReadHighest.setAdapter(homeReadHighestAdapter);
         mRecyclerViewReadHighest.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+        homeReadHighestAdapter.setOnItemClickListener(new HistoryRecycleAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, Novel novel) {
+                Bundle bundle = new Bundle();
+                bundle.putString("id",novel.getId());
+                mController.navigate(R.id.comicDetailFragment,bundle);
+            }
+        });
 
         mViewModel = new ViewModelProvider(this).get(NovelViewModel.class);
         if(mViewModel.getAllNovel() != null){
@@ -77,15 +90,16 @@ public class HomeFragment extends Fragment {
 
         mModel = new ViewModelProvider(this).get(ItemClickAllNovelViewModel.class);
         mModel.getSelectedItem().observe(getViewLifecycleOwner(), item -> {
-
         });
-
         mAllNovelAdapter.setOnItemClickListener(new AllNovelAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Novel novel) {
-                mModel.getSelectedItem().observe(getViewLifecycleOwner(), item -> {
-                    item.setChapters(novel.getChapters());
-                });
+//                mModel.getSelectedItem().observe(getViewLifecycleOwner(), item -> {
+//                    item.setChapters(novel.getChapters());
+//                });
+                Bundle bundle = new Bundle();
+                bundle.putString("id",novel.getId());
+                mController.navigate(R.id.comicDetailFragment,bundle);
             }
         });
     }

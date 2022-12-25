@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,8 +24,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.comicapp.R;
+import com.example.comicapp.RecycleAdapter.HistoryRecycleAdapter;
 import com.example.comicapp.RecycleAdapter.VolumeAdapter;
+import com.example.comicapp.Repository.ViewModel.ChapterViewModel;
+import com.example.comicapp.Repository.ViewModel.NovelViewModel;
 import com.example.comicapp.ViewPager2Adapter.ComicDetailAdapter;
+import com.example.comicapp.data.Chapter;
 import com.example.comicapp.data.Novel;
 import com.example.comicapp.databinding.FragmentComicDetailBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,6 +47,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 public class NovelMainContentFragment extends Fragment {
@@ -58,6 +65,7 @@ public class NovelMainContentFragment extends Fragment {
     Button mBtnReadComic;
     Button mButtonAddLibrary;
     TextView mStatus;
+    ChapterViewModel mViewModel;
 
     public static Novel novel;
 
@@ -159,45 +167,29 @@ public class NovelMainContentFragment extends Fragment {
         VolumeAdapter adapter = new VolumeAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//
-//        DocumentReference docRef = db.collection("novel").document(id);
-//        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    DocumentSnapshot document = task.getResult();
-//
-//                    if (document.exists()) {
-//                        Log.d("ttan", "DocumentSnapshot data: " + document.getData());
-//                        mHeader.setText(document.get("name",String.class));
-//                        mAuthor.setText(document.get("author",String.class));
-//                        mStorageReference = storage.getReference(document.get("image",String.class));
-//                        try {
-//                            final File localFile = File.createTempFile("temp","jpg");
-//                            mStorageReference.getFile(localFile)
-//                                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-//                                        @Override
-//                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-//                                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-//                                            mImage.setImageBitmap(bitmap);
-//                                        }
-//                                    }).addOnFailureListener(new OnFailureListener() {
-//                                        @Override
-//                                        public void onFailure(@NonNull Exception e) {
-//                                            Log.d("PhucDVb", "onFailure: ", e);
-//                                        }
-//                                    });
-//                        } catch (IOException e) {
-//                            e.printStackTrace();
-//                        }
-//                    } else {
-//                        Log.d("ttan", "No such document");
-//                    }
-//                } else {
-//                    Log.d("ttan", "get failed with ", task.getException());
-//                }
-//            }
-//        });
+        adapter.setOnItemClickListener(new VolumeAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(View view, Chapter chapter) {
+                Bundle bundle = new Bundle();
+                bundle.putString("ChapterID",chapter.getId());
+                bundle.putString("NovelID", novel.getId());
+                navController.navigate(R.id.readNovelFragment,bundle);
+            }
+        });
+
+
+        mViewModel = new ViewModelProvider(this).get(ChapterViewModel.class);
+        if(mViewModel.getAllChapter(id)!= null){
+            mViewModel.getAllChapter(id).observe(getViewLifecycleOwner(), new Observer<List<Chapter>>() {
+                @Override
+                public void onChanged(List<Chapter> chapters) {
+                    for (Chapter chapter : chapters) {
+                        adapter.setData(chapters);
+                    }
+                }
+            });
+        }
+
 
     }
 }

@@ -61,8 +61,10 @@ public class HomeReadHighestAdapter extends RecyclerView.Adapter<HomeReadHighest
             super(itemView);
             mImage = itemView.findViewById(R.id.imageView3);
             mTxtHeader = itemView.findViewById(R.id.textView);
-            mImage.setOnClickListener(v->{
-
+            itemView.setOnClickListener(v -> {
+                if(mOnItemClickListener != null){
+                    mOnItemClickListener.onClick(itemView, mData.get(getLayoutPosition()));
+                }
             });
 
         }
@@ -88,5 +90,14 @@ public class HomeReadHighestAdapter extends RecyclerView.Adapter<HomeReadHighest
                 e.printStackTrace();
             }
         }
+    }
+    private HistoryRecycleAdapter.OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(HistoryRecycleAdapter.OnItemClickListener onItemClickListener){
+        mOnItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        public void onClick(View view, Novel novel);
     }
 }

@@ -11,6 +11,8 @@ public class Chapter {
         this.name = name;
         this.content = content;
     }
+    public Chapter() {
+    }
 
     public String getId() {
         return id;
