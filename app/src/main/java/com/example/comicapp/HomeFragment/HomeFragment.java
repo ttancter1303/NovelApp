@@ -28,6 +28,7 @@ import com.example.comicapp.RecycleAdapter.HomeReadHighestAdapter;
 import com.example.comicapp.RecycleAdapter.AllNovelAdapter;
 import com.example.comicapp.Repository.ViewModel.ItemClickAllNovelViewModel;
 import com.example.comicapp.Repository.ViewModel.NovelViewModel;
+import com.example.comicapp.Repository.ViewModel.SharedViewModel;
 import com.example.comicapp.data.Novel;
 
 import java.util.List;
@@ -41,7 +42,7 @@ public class HomeFragment extends Fragment {
     AllNovelAdapter mAllNovelAdapter;
     HomeReadHighestAdapter homeReadHighestAdapter;
     NavController mController;
-
+    SharedViewModel sharedViewModel;
 
 
     @Override
@@ -66,9 +67,21 @@ public class HomeFragment extends Fragment {
         homeReadHighestAdapter = new HomeReadHighestAdapter();
         mRecyclerViewReadHighest.setAdapter(homeReadHighestAdapter);
         mRecyclerViewReadHighest.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+
+//        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
+//        sharedViewModel.getSelectedItem().observe(getViewLifecycleOwner(),item->{
+//
+//        });
+
+        mModel = new ViewModelProvider(this).get(ItemClickAllNovelViewModel.class);
+
         homeReadHighestAdapter.setOnItemClickListener(new HistoryRecycleAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Novel novel) {
+                // cần sử dụng shared viewmodel để truyền data tới
+                mModel.getSelectedItem().observe(getViewLifecycleOwner(), item -> {
+                    item.setChapters(novel.getChapters());
+                });
                 Bundle bundle = new Bundle();
                 bundle.putString("id",novel.getId());
                 mController.navigate(R.id.comicDetailFragment,bundle);
@@ -88,15 +101,11 @@ public class HomeFragment extends Fragment {
             });
         }
 
-        mModel = new ViewModelProvider(this).get(ItemClickAllNovelViewModel.class);
-        mModel.getSelectedItem().observe(getViewLifecycleOwner(), item -> {
-        });
+
         mAllNovelAdapter.setOnItemClickListener(new AllNovelAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Novel novel) {
-//                mModel.getSelectedItem().observe(getViewLifecycleOwner(), item -> {
-//                    item.setChapters(novel.getChapters());
-//                });
+
                 Bundle bundle = new Bundle();
                 bundle.putString("id",novel.getId());
                 mController.navigate(R.id.comicDetailFragment,bundle);

@@ -112,9 +112,6 @@ public class NovelMainContentFragment extends Fragment {
 //        });
 //        mediator.attach();
         mBtnReadComic = binding.btnReadComic;
-        mBtnReadComic.setOnClickListener(v->{
-           navController.navigate(R.id.readNovelFragment);
-        });
 
         Bundle bundle = requireArguments();
         String id = bundle.getString("id");
@@ -177,6 +174,12 @@ public class NovelMainContentFragment extends Fragment {
             }
         });
 
+        mBtnReadComic.setOnClickListener(v->{
+            Bundle bundle2 = new Bundle();
+            bundle.putString("ChapterID",adapter.getFirstItemValue());
+            bundle.putString("NovelID", id);
+            navController.navigate(R.id.readNovelFragment,bundle2);
+        });
 
         mViewModel = new ViewModelProvider(this).get(ChapterViewModel.class);
         if(mViewModel.getAllChapter(id)!= null){

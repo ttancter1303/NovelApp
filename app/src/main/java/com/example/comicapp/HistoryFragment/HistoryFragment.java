@@ -53,11 +53,11 @@ public class HistoryFragment extends Fragment {
             }
         });
         mediator.attach();
-        ImageView mBtnSetting = binding.btnSetting;
-        mBtnSetting.setOnClickListener(v->{
-            Navigation.findNavController(requireActivity(), R.id.fragment_host_container).
-                    navigate(R.id.action_historyFragment_to_settingFragment);
-        });
+//        ImageView mBtnSetting = binding.btnSetting;
+//        mBtnSetting.setOnClickListener(v->{
+//            Navigation.findNavController(requireActivity(), R.id.fragment_host_container).
+//                    navigate(R.id.action_historyFragment_to_settingFragment);
+//        });
 
     }
 }

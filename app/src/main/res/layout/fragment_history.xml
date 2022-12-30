@@ -20,14 +20,14 @@
             android:text="Tủ Truyện"
              />
 
-        <ImageView
-            android:id="@+id/btn_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/setting"
-            android:layout_gravity="right"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/btn_setting"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:contentDescription="@string/app_name"-->
+<!--            android:src="@drawable/setting"-->
+<!--            android:layout_gravity="right"/>-->
 
 
     </LinearLayout>

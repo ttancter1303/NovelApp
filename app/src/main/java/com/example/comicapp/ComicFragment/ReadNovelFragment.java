@@ -25,6 +25,9 @@ import com.google.firebase.storage.FirebaseStorage;
 public class ReadNovelFragment extends Fragment {
     FragmentReadNovelBinding binding;
     TextView mContent;
+    TextView mPre;
+    TextView mNext;
+    TextView mMain;
     FirebaseStorage storage;
     FirebaseFirestore db;
     public static Chapter chapter;
@@ -50,6 +53,9 @@ public class ReadNovelFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mContent = binding.txtContent;
+//        mPre = binding.txtChuongTruoc;
+//        mNext = binding.txtChuongSau;
+//        mMain = binding.txtMain;
         Bundle bundle = requireArguments();
         String chapterID = bundle.getString("ChapterID");
         String novelID = bundle.getString("NovelID");

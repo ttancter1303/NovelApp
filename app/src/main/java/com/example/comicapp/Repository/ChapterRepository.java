@@ -15,7 +15,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChapterRepository {
     FirebaseFirestore mFirestore;
@@ -35,12 +38,14 @@ public class ChapterRepository {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         List<Chapter> chapterList = new ArrayList<>();
+                        List<Chapter> List = new ArrayList<>();
                         for (DocumentSnapshot document : value.getDocuments()){
                             String id = document.getId();
                             String name = document.get("name",String.class);
                             String content = document.get("content",String.class);
                             Chapter chapter = new Chapter(id,name,content);
                             chapterList.add(chapter);
+                            sort(chapterList);
                             chapters.setValue(chapterList);
 
                         }
@@ -48,5 +53,9 @@ public class ChapterRepository {
                 });
 
         return chapters;
+    }
+    public void sort(List<Chapter> chapterList){
+        chapterList.sort((o1, o2)
+                -> o1.getName().compareTo(o2.getName()));
     }
 }

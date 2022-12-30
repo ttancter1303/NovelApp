@@ -39,14 +39,14 @@ public class VolumeAdapter extends RecyclerView.Adapter<VolumeAdapter.ViewHolder
     public int getItemCount() {
         return mData.size();
     }
-
+    public String getFirstItemValue(){
+        return String.valueOf(mData.get(0).getId());
+    }
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView mName;
-        TextView mIndex;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            mIndex = itemView.findViewById(R.id.txt_soChuong);
             mName = itemView.findViewById(R.id.txt_tenChuong);
             itemView.setOnClickListener(v -> {
                 if(mOnItemClickListener != null){
@@ -56,7 +56,7 @@ public class VolumeAdapter extends RecyclerView.Adapter<VolumeAdapter.ViewHolder
         }
 
         public void bindView(Chapter chapter) {
-            mName.setText(chapter.getName());
+            mName.setText("Chương " + chapter.getName());
         }
     }
     private VolumeAdapter.OnItemClickListener mOnItemClickListener;
