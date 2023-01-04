@@ -22,18 +22,22 @@ import com.example.comicapp.RecycleAdapter.HistoryRecycleAdapter;
 import com.example.comicapp.Repository.NovelRepository;
 import com.example.comicapp.Repository.ViewModel.NovelViewModel;
 import com.example.comicapp.data.Novel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryFragment extends Fragment {
     HistoryRecycleAdapter adapter;
+    FirebaseUser mFirebaseUser;
     NavController mController;
     NovelViewModel mNovelViewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         return inflater.inflate(R.layout.fragment_category, container, false);
     }
 
@@ -55,8 +59,8 @@ public class CategoryFragment extends Fragment {
         });
 
         mNovelViewModel = new ViewModelProvider(this).get(NovelViewModel.class);
-        if(mNovelViewModel.getAllNovel() != null){
-            mNovelViewModel.getAllNovel().observe(getViewLifecycleOwner(), new Observer<List<Novel>>() {
+        if(mNovelViewModel.getAllNovelCategory(mFirebaseUser.getUid()) != null){
+            mNovelViewModel.getAllNovelCategory(mFirebaseUser.getUid()) .observe(getViewLifecycleOwner(), new Observer<List<Novel>>() {
                 @Override
                 public void onChanged(List<Novel> novels) {
                     for (Novel novel : novels) {

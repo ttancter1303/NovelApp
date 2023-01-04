@@ -12,11 +12,16 @@ import java.util.List;
 public class NovelViewModel extends ViewModel {
     NovelRepository mNovelRepository;
     LiveData<List<Novel>> mAllNovel;
+    LiveData<List<Novel>> mNovelCategory;
     public NovelViewModel(){
         mNovelRepository = new NovelRepository();
         mAllNovel = mNovelRepository.getAllNovelv2();
     }
     public LiveData<List<Novel>> getAllNovel(){
         return mAllNovel;
+    }
+    public LiveData<List<Novel>> getAllNovelCategory(String userID){
+        mNovelCategory = mNovelRepository.getAllNovelCategory(userID);
+        return  mNovelCategory;
     }
 }

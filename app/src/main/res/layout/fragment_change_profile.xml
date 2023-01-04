@@ -124,32 +124,33 @@
             app:layout_column="1"
             app:layout_row="4" />
 
-            <RadioGroup
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_column="1"
-                app:layout_row="5">
+<!--            <RadioGroup-->
+<!--                android:id="@+id/radio"-->
+<!--                android:layout_width="300dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                app:layout_column="1"-->
+<!--                app:layout_row="5">-->
 
-                <RadioButton
-                    android:id="@+id/btn_male"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:text="Nam" />
+<!--                <RadioButton-->
+<!--                    android:id="@+id/btn_male"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="left"-->
+<!--                    android:text="Nam" />-->
 
-                <RadioButton
-                    android:id="@+id/btn_gay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nữ" />
-                <RadioButton
-                    android:id="@+id/btn_female"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Giới tính khác" />
-            </RadioGroup>
+<!--                <RadioButton-->
+<!--                    android:id="@+id/btn_gay"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Nữ" />-->
+<!--                <RadioButton-->
+<!--                    android:id="@+id/btn_female"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="Giới tính khác" />-->
+<!--            </RadioGroup>-->
 
         <Button
             android:id="@+id/btn_save_chage_profile"

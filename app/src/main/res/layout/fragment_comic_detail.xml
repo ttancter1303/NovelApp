@@ -93,31 +93,23 @@
                 app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-                <Button
-                    android:id="@+id/btn_readComic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:background="@drawable/border_radius"
-                    android:text="Đọc truyện"
-                    android:textSize="8sp" />
+<!--                <Button-->
+<!--                    android:id="@+id/btn_readComic"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="35dp"-->
+<!--                    android:background="@drawable/border_radius"-->
+<!--                    android:text="Đọc truyện"-->
+<!--                    android:textSize="8sp" />-->
 
                 <Button
-                    android:id="@+id/btn_addToLiberry"
+                    android:id="@+id/btn_addToLibrary"
                     android:layout_marginLeft="10dp"
-                    android:layout_width="35dp"
+                    android:layout_width="wrap_content"
                     android:textSize="8sp"
                     android:layout_height="35dp"
                     android:background="@drawable/border_radius"
-                    android:text="+" />
+                    android:text="Thêm vào tủ truyện" />
 
-                <TextView
-                    android:id="@+id/txt_addtoLibery"
-                    android:layout_width="36dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="Thêm vào Tủ Truyện"
-                    android:textSize="9dp" />
             </LinearLayout>
 
 

@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.comicapp.R;
 import com.example.comicapp.RecycleAdapter.HistoryRecycleAdapter;
@@ -38,9 +39,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -48,7 +53,9 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NovelMainContentFragment extends Fragment {
 
@@ -57,6 +64,8 @@ public class NovelMainContentFragment extends Fragment {
     FirebaseFirestore db;
     Novel mNovel;
     StorageReference mStorageReference;
+    FirebaseUser mFirebaseUser;
+    FirebaseAuth mFirebaseAuth;
     ImageView mImage;
     TextView mHeader;
     TextView mAuthor;
@@ -75,6 +84,9 @@ public class NovelMainContentFragment extends Fragment {
         // Inflate the layout for this fragment
         storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         binding = FragmentComicDetailBinding.inflate(inflater,container,false);
         return binding.getRoot();
     }
@@ -85,8 +97,7 @@ public class NovelMainContentFragment extends Fragment {
         mImage = binding.imageView2;
         mHeader = binding.textComicName;
         mAuthor = binding.textAuthor;
-        mButtonAddLibrary = binding.btnAddToLiberry;
-        mBtnReadComic = binding.btnReadComic;
+        mButtonAddLibrary = binding.btnAddToLibrary;
         mNovelType = binding.typeNovel;
         mIntro = binding.txtIntro;
         mStatus = binding.txtStatus;
@@ -111,16 +122,49 @@ public class NovelMainContentFragment extends Fragment {
 //            }
 //        });
 //        mediator.attach();
-        mBtnReadComic = binding.btnReadComic;
+//        mBtnReadComic = binding.btnReadComic;
 
         Bundle bundle = requireArguments();
         String id = bundle.getString("id");
+        mButtonAddLibrary.setOnClickListener( v->{
+            Map<String,Object> data = new HashMap<>();
+            data.put("novel_id",id);
+            db.collection("user").document(mFirebaseUser.getUid())
+                    .collection("novel_mark")
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isComplete()){
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    if(document.exists()){
+                                        if(document.get("novel_id") != null){
+                                            Toast.makeText(requireContext(), "Truyện đã tồn tại trong tủ truyện", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }else{
 
+                                    }
+                                }
+                            }
+                        }
+                    });
+            db.collection("user").document(mFirebaseUser.getUid()).collection("novel_mark")
+                    .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Toast.makeText(requireContext(), "Thêm truyện vào tủ truyện thành công", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(requireContext(), "Lỗi không thêm được truyện vào tủ truyện", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+            });
         DocumentReference docRef = db.collection("novel").document(id);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                Log.d("ttan", "onSuccess: "+documentSnapshot.toString());
                 novel = documentSnapshot.toObject(Novel.class);
                 novel.setId(id);
                 mHeader.setText(novel.getname());
@@ -174,12 +218,12 @@ public class NovelMainContentFragment extends Fragment {
             }
         });
 
-        mBtnReadComic.setOnClickListener(v->{
-            Bundle bundle2 = new Bundle();
-            bundle.putString("ChapterID",adapter.getFirstItemValue());
-            bundle.putString("NovelID", id);
-            navController.navigate(R.id.readNovelFragment,bundle2);
-        });
+//        mBtnReadComic.setOnClickListener(v->{
+//            Bundle bundle2 = new Bundle();
+//            bundle.putString("ChapterID",adapter.getFirstItemValue());
+//            bundle.putString("NovelID", id);
+//            navController.navigate(R.id.readNovelFragment,bundle2);
+//        });
 
         mViewModel = new ViewModelProvider(this).get(ChapterViewModel.class);
         if(mViewModel.getAllChapter(id)!= null){
@@ -192,7 +236,5 @@ public class NovelMainContentFragment extends Fragment {
                 }
             });
         }
-
-
     }
 }
