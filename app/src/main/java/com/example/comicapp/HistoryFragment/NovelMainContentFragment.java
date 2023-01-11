@@ -58,7 +58,6 @@ import java.util.List;
 import java.util.Map;
 
 public class NovelMainContentFragment extends Fragment {
-
     FragmentComicDetailBinding binding;
     FirebaseStorage storage;
     FirebaseFirestore db;
@@ -127,8 +126,6 @@ public class NovelMainContentFragment extends Fragment {
         Bundle bundle = requireArguments();
         String id = bundle.getString("id");
         mButtonAddLibrary.setOnClickListener( v->{
-            Map<String,Object> data = new HashMap<>();
-            data.put("novel_id",id);
             db.collection("user").document(mFirebaseUser.getUid())
                     .collection("novel_mark")
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -141,25 +138,13 @@ public class NovelMainContentFragment extends Fragment {
                                             Toast.makeText(requireContext(), "Truyện đã tồn tại trong tủ truyện", Toast.LENGTH_SHORT).show();
                                         }
                                     }else{
-
+                                        addNovelToCategory(id);
                                     }
                                 }
                             }
                         }
                     });
-            db.collection("user").document(mFirebaseUser.getUid()).collection("novel_mark")
-                    .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            Toast.makeText(requireContext(), "Thêm truyện vào tủ truyện thành công", Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(requireContext(), "Lỗi không thêm được truyện vào tủ truyện", Toast.LENGTH_SHORT).show();
 
-                        }
-                    });
             });
         DocumentReference docRef = db.collection("novel").document(id);
         docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
@@ -236,5 +221,23 @@ public class NovelMainContentFragment extends Fragment {
                 }
             });
         }
+    }
+    public void addNovelToCategory(String id){
+        Map<String,Object> data = new HashMap<>();
+        data.put("novel_id",id);
+        db.collection("user").document(mFirebaseUser.getUid()).collection("novel_mark")
+                .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(requireContext(), "Thêm truyện vào tủ truyện thành công", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(requireContext(), "Lỗi không thêm được truyện vào tủ truyện", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
     }
 }

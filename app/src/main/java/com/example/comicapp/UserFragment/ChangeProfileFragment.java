@@ -99,15 +99,9 @@ public class ChangeProfileFragment extends Fragment {
                         Log.d("ttan", "DocumentSnapshot data: " + document.getData());
                         mUserName.setText(document.get("name").toString());
                         mUserEmail.setText(document.get("email").toString());
-//                        if (document.get("birth") != null || document.get("phone") != null || document.get("note") != null){
-//                            mUserBirth.setText(document.get("birth").toString());
-//                            mUserPhone.setText(document.get("phone").toString());
-//                            mUserNote.setText(document.get("note").toString());
-//                        }else{
-//                            mUserBirth.setText("");
-//                            mUserPhone.setText("");
-//                            mUserNote.setText("");
-//                        }
+                        mUserBirth.setText(document.get("birth").toString());
+                        mUserPhone.setText(document.get("phone").toString());
+                        mUserNote.setText(document.get("note").toString());
                     } else {
                         Log.d("ttan", "No such document");
                     }
@@ -162,16 +156,13 @@ public class ChangeProfileFragment extends Fragment {
                     }
                 });
     }
-
-
-
     public void changeUserFromDBV2(String Email,String Name,String Birth, String Phone, String Note,String user){
         Map<String,Object> dataMap = new HashMap<>();
         dataMap.put("email",Email);
         dataMap.put("name",Name);
         dataMap.put("birth",Birth);
-        dataMap.put("Phone",Phone);
-        dataMap.put("Note", Note);
+        dataMap.put("phone",Phone);
+        dataMap.put("note", Note);
         db.collection("user")
                 .document(user)
                 .set(dataMap).addOnSuccessListener(new OnSuccessListener<Void>() {

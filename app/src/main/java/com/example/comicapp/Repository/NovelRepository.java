@@ -102,7 +102,6 @@ public class NovelRepository {
                                     String type = value.get("type",String.class);
                                     DocumentReference author = value.get("author", DocumentReference.class);
                                     Novel novel = new Novel(id, name, gioiThieu, image,type, author, status);
-                                    Log.d("ttan", "onEvent: "+novel.toString());
                                     value.getReference().collection("chapter")
                                             .addSnapshotListener(new EventListener<QuerySnapshot>() {
                                                 @Override
@@ -115,21 +114,20 @@ public class NovelRepository {
                                                         String content = valueDocument.get("content", String.class);
                                                         Chapter chapter = new Chapter(id, name, content);
                                                         chapters.add(chapter);
-                                                        novel.setChapters(chapters);
-                                                        novels.add(novel);
-                                                        Listnovels.setValue(novels);
                                                     }
+                                                    novel.setChapters(chapters);
+
                                                 }
                                             });
+                                    novels.add(novel);
                                 }
                             });
+                            Listnovels.setValue(novels);
                         }
+
 
                     }
                 });
-
-
-
         return Listnovels;
     }
     public List<Novel> getNovelByID(String novelID){

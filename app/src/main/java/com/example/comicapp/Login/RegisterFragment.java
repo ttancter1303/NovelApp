@@ -102,6 +102,9 @@ public class RegisterFragment extends Fragment {
     }
     public void addUserToDB(String Email,String Name){
         Map<String,Object> dataMap = new HashMap<>();
+        dataMap.put("phone","");
+        dataMap.put("birth","");
+        dataMap.put("note","");
         dataMap.put("email",Email);
         dataMap.put("name",Name);
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
