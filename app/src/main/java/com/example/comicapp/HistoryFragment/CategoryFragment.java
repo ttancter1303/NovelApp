@@ -29,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryFragment extends Fragment {
-    HistoryRecycleAdapter adapter;
+    CategoryAdapter adapter;
     FirebaseUser mFirebaseUser;
     NavController mController;
     NovelViewModel mNovelViewModel;
@@ -45,7 +45,7 @@ public class CategoryFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         RecyclerView recyclerView = view.findViewById(R.id.recycleViewCategory);
-        adapter = new HistoryRecycleAdapter();
+        adapter = new CategoryAdapter();
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mController = Navigation.findNavController(requireActivity(), R.id.fragment_host_container);

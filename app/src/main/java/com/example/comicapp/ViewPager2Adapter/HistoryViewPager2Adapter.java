@@ -17,18 +17,19 @@ public class HistoryViewPager2Adapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position){
-            case 0:
-                return new HistoryRecyclerFragment();
+//            case 0:
+//                return new HistoryRecyclerFragment();
             case 1:
 //                return new ComicDetailFragment();
                 return new CategoryFragment();
             default:
-                return new HistoryRecyclerFragment();
+                return new CategoryFragment();
+//                return new HistoryRecyclerFragment();
         }
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 1;
     }
 }

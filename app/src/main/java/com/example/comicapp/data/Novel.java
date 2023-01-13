@@ -10,10 +10,30 @@ public class Novel {
     private String intro;
     private String image;
     private String type;
+    private String date;
     private DocumentReference author;
     private Boolean status;
     private List<Chapter> chapters;
 
+    public Novel(String id, String name, String intro, String image, String type, String date, DocumentReference author, Boolean status, List<Chapter> chapters) {
+        this.id = id;
+        this.name = name;
+        this.intro = intro;
+        this.image = image;
+        this.type = type;
+        this.date = date;
+        this.author = author;
+        this.status = status;
+        this.chapters = chapters;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public Novel(String id, String name, String intro, String image, String type, DocumentReference author, Boolean status, List<Chapter> chapters) {
         this.id = id;

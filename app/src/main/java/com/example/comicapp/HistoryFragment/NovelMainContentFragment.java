@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import java.util.Calendar;
+import java.util.Date;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -127,23 +129,38 @@ public class NovelMainContentFragment extends Fragment {
         String id = bundle.getString("id");
         mButtonAddLibrary.setOnClickListener( v->{
             db.collection("user").document(mFirebaseUser.getUid())
-                    .collection("novel_mark")
-                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            .collection("novel_mark").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isComplete()){
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    if(document.exists()){
-                                        if(document.get("novel_id") != null){
-                                            Toast.makeText(requireContext(), "Truyện đã tồn tại trong tủ truyện", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }else{
-                                        addNovelToCategory(id);
-                                    }
+                            for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                                if (documentSnapshot.get("novel_id") != null){
+                                    Toast.makeText(requireContext(), "Truyện đã tồn tại trong tủ truyện", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    addNovelToCategory(id);
                                 }
                             }
                         }
                     });
+
+
+//            db.collection("user").document(mFirebaseUser.getUid())
+//                    .collection("novel_mark")
+//                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                            if (task.isComplete()){
+//                                for (QueryDocumentSnapshot document : task.getResult()) {
+//                                    if(document.exists()){
+//                                        if(document.get("novel_id") != null){
+//                                            Toast.makeText(requireContext(), "Truyện đã tồn tại trong tủ truyện", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    }else{
+//                                        addNovelToCategory(id);
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    });
 
             });
         DocumentReference docRef = db.collection("novel").document(id);
@@ -224,7 +241,9 @@ public class NovelMainContentFragment extends Fragment {
     }
     public void addNovelToCategory(String id){
         Map<String,Object> data = new HashMap<>();
+        Date currentTime = Calendar.getInstance().getTime();
         data.put("novel_id",id);
+        data.put("date_saved",currentTime);
         db.collection("user").document(mFirebaseUser.getUid()).collection("novel_mark")
                 .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
