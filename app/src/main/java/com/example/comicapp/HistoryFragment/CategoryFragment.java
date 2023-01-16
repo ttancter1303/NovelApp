@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.comicapp.R;
 import com.example.comicapp.RecycleAdapter.HistoryRecycleAdapter;
@@ -33,6 +34,7 @@ public class CategoryFragment extends Fragment {
     FirebaseUser mFirebaseUser;
     NavController mController;
     NovelViewModel mNovelViewModel;
+    TextView mTitle;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class CategoryFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        mTitle = view.findViewById(R.id.title_temp);
         RecyclerView recyclerView = view.findViewById(R.id.recycleViewCategory);
         adapter = new CategoryAdapter();
         recyclerView.setAdapter(adapter);
@@ -57,7 +60,6 @@ public class CategoryFragment extends Fragment {
                 mController.navigate(R.id.comicDetailFragment,bundle);
             }
         });
-
         mNovelViewModel = new ViewModelProvider(this).get(NovelViewModel.class);
         if(mNovelViewModel.getAllNovelCategory(mFirebaseUser.getUid()) != null){
             mNovelViewModel.getAllNovelCategory(mFirebaseUser.getUid()) .observe(getViewLifecycleOwner(), new Observer<List<Novel>>() {
@@ -69,5 +71,9 @@ public class CategoryFragment extends Fragment {
                 }
             });
         }
+        if (adapter.getItemCount() == 0){
+            mTitle.setText("Chưa có truyện được lưu trong tủ truyện");
+        }
+
     }
 }

@@ -32,15 +32,21 @@
 
     </LinearLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabHistory"
-        android:layout_width="213dp"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/app_name" />
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPagerHistory"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.example.comicapp.HistoryFragment.CategoryFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></androidx.viewpager2.widget.ViewPager2>
+        android:layout_height="wrap_content" />
+
+    <!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tabHistory"-->
+<!--        android:layout_width="213dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:contentDescription="@string/app_name" />-->
+
+<!--    <androidx.viewpager2.widget.ViewPager2-->
+<!--        android:id="@+id/viewPagerHistory"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"></androidx.viewpager2.widget.ViewPager2>-->
 
 </LinearLayout>

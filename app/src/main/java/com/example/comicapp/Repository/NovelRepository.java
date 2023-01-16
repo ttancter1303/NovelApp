@@ -116,13 +116,15 @@ public class NovelRepository {
                                                         chapters.add(chapter);
                                                     }
                                                     novel.setChapters(chapters);
+                                                    novels.add(novel);
+                                                    Listnovels.setValue(novels);
 
                                                 }
                                             });
-                                    novels.add(novel);
+
                                 }
                             });
-                            Listnovels.setValue(novels);
+
                         }
 
 

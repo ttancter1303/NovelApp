@@ -38,7 +38,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public CategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         storage = FirebaseStorage.getInstance();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.novel_saved, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_comic, parent, false);
         return new ViewHolder(view);
     }
 
@@ -59,8 +59,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         StorageReference mStorageReference;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            mImage = itemView.findViewById(R.id.imageView4);
-            mTextView = itemView.findViewById(R.id.txt_header);
+            mImage = itemView.findViewById(R.id.imageView);
+            mTextView = itemView.findViewById(R.id.header_title);
 //            mDate = itemView.findViewById(R.id.txt_date);
             itemView.setOnClickListener(v -> {
                 if(mOnItemClickListener != null){

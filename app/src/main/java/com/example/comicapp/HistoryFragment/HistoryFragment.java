@@ -35,24 +35,24 @@ public class HistoryFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        ViewPager2 viewPager2 = binding.viewPagerHistory;
-        TabLayout tabLayout = binding.tabHistory;
-        HistoryViewPager2Adapter adapter = new HistoryViewPager2Adapter(this);
-        viewPager2.setAdapter(adapter);
-        TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                switch (position){
-//                    case 0:
-//                        tab.setText("Lịch sử");
+//        ViewPager2 viewPager2 = binding.viewPagerHistory;
+//        TabLayout tabLayout = binding.tabHistory;
+//        HistoryViewPager2Adapter adapter = new HistoryViewPager2Adapter(this);
+//        viewPager2.setAdapter(adapter);
+//        TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+//            @Override
+//            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+//                switch (position){
+////                    case 0:
+////                        tab.setText("Lịch sử");
+////                        break;
+//                    case 1:
+//                        tab.setText("Đánh dấu");
 //                        break;
-                    case 1:
-                        tab.setText("Đánh dấu");
-                        break;
-                }
-            }
-        });
-        mediator.attach();
+//                }
+//            }
+//        });
+//        mediator.attach();
 //        ImageView mBtnSetting = binding.btnSetting;
 //        mBtnSetting.setOnClickListener(v->{
 //            Navigation.findNavController(requireActivity(), R.id.fragment_host_container).
