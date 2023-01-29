@@ -128,20 +128,23 @@ public class NovelMainContentFragment extends Fragment {
         Bundle bundle = requireArguments();
         String id = bundle.getString("id");
         mButtonAddLibrary.setOnClickListener( v->{
-            addNovelToCategory(id);
+//            addNovelToCategory(id);
 //            addNovelToCategory(id);
             db.collection("user").document(mFirebaseUser.getUid()).collection("novel_mark")
                     .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isComplete()){
+                                boolean isExist = false;
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    if (document.getString("novel_id") == id) {
+                                    if (id != null && id.equals(document.getString("novel_id"))) {
+                                        isExist = true;
                                         Toast.makeText(requireContext(), "Truyện đã tồn tại trong tủ truyện", Toast.LENGTH_SHORT).show();
-                                    }else {
-                                        addNovelToCategory(id);
                                         break;
                                     }
+                                }
+                                if(!isExist){
+                                    addNovelToCategory(id);
                                 }
                             }
                         }

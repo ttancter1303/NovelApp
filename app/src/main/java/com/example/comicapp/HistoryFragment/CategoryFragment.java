@@ -61,15 +61,17 @@ public class CategoryFragment extends Fragment {
             }
         });
         mNovelViewModel = new ViewModelProvider(this).get(NovelViewModel.class);
-        if(mNovelViewModel.getAllNovelCategory(mFirebaseUser.getUid()) != null){
-            mNovelViewModel.getAllNovelCategory(mFirebaseUser.getUid()) .observe(getViewLifecycleOwner(), new Observer<List<Novel>>() {
-                @Override
-                public void onChanged(List<Novel> novels) {
-                    for (Novel novel : novels) {
-                        adapter.setData(novels);
+        if(mFirebaseUser != null) {
+            if (mNovelViewModel.getAllNovelCategory(mFirebaseUser.getUid()) != null) {
+                mNovelViewModel.getAllNovelCategory(mFirebaseUser.getUid()).observe(getViewLifecycleOwner(), new Observer<List<Novel>>() {
+                    @Override
+                    public void onChanged(List<Novel> novels) {
+                        for (Novel novel : novels) {
+                            adapter.setData(novels);
+                        }
                     }
-                }
-            });
+                });
+            }
         }
         if (adapter.getItemCount() == 0){
             mTitle.setText("Chưa có truyện được lưu trong tủ truyện");
