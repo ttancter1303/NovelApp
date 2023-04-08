@@ -25,6 +25,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.lang.ref.Reference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class NovelRepository {
@@ -73,6 +74,50 @@ public class NovelRepository {
                                             }
                                             novel.setChapters(chapters);
                                             novelList.add(novel);
+                                            novels.setValue(novelList);
+                                        }
+                                    });
+
+                        }
+
+                    }
+                });
+        return novels;
+    }
+    public MutableLiveData<List<Novel>> getNewNovel() {
+        MutableLiveData<List<Novel>> novels = new MutableLiveData<>(new ArrayList<>());
+        mFirestore.collection("novel")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        List<Novel> novelList = new ArrayList<>();
+                        for (DocumentSnapshot document : value.getDocuments()) {
+//                           Novel novel = new Novel(document.getId(),document.get("name",String.class),document.get("image",String.class),document.get("status",Boolean.class));
+//                           Log.d("ttan", "onEvent: "+ novel.toString());
+                            String id = document.getId();
+                            String gioiThieu = document.get("intro", String.class);
+                            String image = document.get("image", String.class);
+                            String name = document.get("name", String.class);
+                            Boolean status = document.get("status", Boolean.class);
+                            String type = document.get("type",String.class);
+                            DocumentReference author = document.get("author", DocumentReference.class);
+                            Novel novel = new Novel(id, name, gioiThieu, image,type, author, status);
+                            document.getReference().collection("chapter")
+                                    .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                            List<Chapter> chapters = null;
+                                            for (DocumentSnapshot valueDocument : value.getDocuments()) {
+                                                chapters = new ArrayList<>();
+                                                String id = valueDocument.getId(); // xem lai id
+                                                String name = valueDocument.get("name", String.class);
+                                                String content = valueDocument.get("content", String.class);
+                                                Chapter chapter = new Chapter(id, name, content);
+                                                chapters.add(chapter);
+                                            }
+                                            novel.setChapters(chapters);
+                                            novelList.add(novel);
+                                            Collections.reverse(novelList);
                                             novels.setValue(novelList);
                                         }
                                     });
@@ -132,6 +177,7 @@ public class NovelRepository {
                 });
         return Listnovels;
     }
+
     public List<Novel> getNovelByID(String novelID){
         List<Novel> novels = new ArrayList<>();
         mFirestore.collection("novel").document(novelID).addSnapshotListener(new EventListener<DocumentSnapshot>() {

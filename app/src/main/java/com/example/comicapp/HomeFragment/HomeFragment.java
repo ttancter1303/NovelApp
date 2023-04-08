@@ -94,9 +94,16 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onChanged(List<Novel> novels) {
                     for (Novel novel : novels) {
-                        mAllNovelAdapter.setData(novels);
                         homeReadHighestAdapter.setData(novels);
                     }
+                }
+            });
+        }
+        if (mViewModel.getNewNovel() != null){
+            mViewModel.getNewNovel().observe(getViewLifecycleOwner(), new Observer<List<Novel>>() {
+                @Override
+                public void onChanged(List<Novel> novels) {
+                    mAllNovelAdapter.setData(novels);
                 }
             });
         }

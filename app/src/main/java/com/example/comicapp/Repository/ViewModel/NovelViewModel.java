@@ -13,13 +13,17 @@ public class NovelViewModel extends ViewModel {
     NovelRepository mNovelRepository;
     LiveData<List<Novel>> mAllNovel;
     LiveData<List<Novel>> mNovelCategory;
+    LiveData<List<Novel>> mNewNovel;
+
     public NovelViewModel(){
         mNovelRepository = new NovelRepository();
         mAllNovel = mNovelRepository.getAllNovelv2();
+        mNewNovel = mNovelRepository.getNewNovel();
     }
     public LiveData<List<Novel>> getAllNovel(){
         return mAllNovel;
     }
+    public LiveData<List<Novel>> getNewNovel(){return mNewNovel;}
     public LiveData<List<Novel>> getAllNovelCategory(String userID){
         mNovelCategory = mNovelRepository.getAllNovelCategory(userID);
         return  mNovelCategory;

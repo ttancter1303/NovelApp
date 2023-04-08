@@ -73,9 +73,5 @@ public class CategoryFragment extends Fragment {
                 });
             }
         }
-        if (adapter.getItemCount() == 0){
-            mTitle.setText("Chưa có truyện được lưu trong tủ truyện");
-        }
-
     }
 }
