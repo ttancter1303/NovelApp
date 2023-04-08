@@ -84,5 +84,10 @@
         android:id="@+id/savedNovelContentMainFragment"
         android:name="com.example.comicapp.ComicFragment.SavedNovelContentMainFragment"
         android:label="SavedNovelContentMainFragment" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.comicapp.HistoryFragment.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" />
 
 </navigation>

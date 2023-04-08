@@ -57,7 +57,9 @@ public class CategoryFragment extends Fragment {
             public void onClick(View view, Novel novel) {
                 Bundle bundle = new Bundle();
                 bundle.putString("id",novel.getId());
-                mController.navigate(R.id.comicDetailFragment,bundle);
+                mController.navigate(R.id.savedNovelContentMainFragment,bundle);
+//                mController.navigate(R.id.comicDetailFragment,bundle);
+
             }
         });
         mNovelViewModel = new ViewModelProvider(this).get(NovelViewModel.class);

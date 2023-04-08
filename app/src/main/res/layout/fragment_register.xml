@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login.RegisterFragment"
+    android:layout_margin="10dp"
     android:orientation="vertical">
 
 
@@ -35,7 +36,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:padding="10dp"
-        android:hint="email"
+        android:hint="Email"
         android:layout_marginTop="20dp"/>
 
     <EditText
