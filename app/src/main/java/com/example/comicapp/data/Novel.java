@@ -26,7 +26,16 @@ public class Novel {
         this.status = status;
         this.chapters = chapters;
     }
-
+    public Novel(String id, String name, String intro, String image, String type, String date, DocumentReference author, Boolean status) {
+        this.id = id;
+        this.name = name;
+        this.intro = intro;
+        this.image = image;
+        this.type = type;
+        this.date = date;
+        this.author = author;
+        this.status = status;
+    }
     public String getDate() {
         return date;
     }

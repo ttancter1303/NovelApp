@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import androidx.annotation.NonNull;
@@ -228,9 +229,11 @@ public class NovelMainContentFragment extends Fragment {
     }
     public void addNovelToCategory(String id){
         Map<String,Object> data = new HashMap<>();
-        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("'Date 'dd-MM-yyyy '\n\nand\n\nTime\n'HH:mm:ss z");
+        String currentDateAndTime = sdf.format(new Date());
+        String date = currentDateAndTime.substring(5,16);
         data.put("novel_id",id);
-        data.put("date_saved",currentTime);
+        data.put("date_saved",date);
 
         db.collection("user").document(mFirebaseUser.getUid()).collection("novel_mark")
                 .add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

@@ -61,7 +61,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             super(itemView);
             mImage = itemView.findViewById(R.id.imageView);
             mTextView = itemView.findViewById(R.id.header_title);
-//            mDate = itemView.findViewById(R.id.txt_date);
+            mDate = itemView.findViewById(R.id.txt_time);
             itemView.setOnClickListener(v -> {
                 if(mOnItemClickListener != null){
                     mOnItemClickListener.onClick(itemView, mData.get(getLayoutPosition()));
@@ -72,6 +72,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         public void bindView(Novel novel){
             mStorageReference = storage.getReference(novel.getImage());
             mTextView.setText(novel.getname());
+            mDate.setText(novel.getDate());
             try {
                 final File localFile = File.createTempFile("temp","jpg");
                 mStorageReference.getFile(localFile)

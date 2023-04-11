@@ -55,11 +55,13 @@ public class ComicDetailRVAdapter extends RecyclerView.Adapter<ComicDetailRVAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView mImage;
         TextView mTextView;
+        TextView mDate;
         StorageReference mStorageReference;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mImage = itemView.findViewById(R.id.imageView);
             mTextView = itemView.findViewById(R.id.header_title);
+            mDate = itemView.findViewById(R.id.txt_time);
             itemView.setOnClickListener(v->{
                 if(mOnItemClickListener != null){
                     mOnItemClickListener.onClick(itemView,mData.get(getLayoutPosition()));
@@ -69,7 +71,6 @@ public class ComicDetailRVAdapter extends RecyclerView.Adapter<ComicDetailRVAdap
         }
 
         public void bindView(Novel novel){
-
             mStorageReference = storage.getReference(novel.getImage());
             try {
                 final File localFile = File.createTempFile("temp","jpg");

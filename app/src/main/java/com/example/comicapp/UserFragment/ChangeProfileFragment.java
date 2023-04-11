@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.comicapp.R;
 import com.example.comicapp.data.User;
 import com.example.comicapp.databinding.FragmentChangeProfileBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,6 +58,7 @@ public class ChangeProfileFragment extends Fragment {
     StorageReference storageRef;
     FirebaseStorage storage;
     FirebaseFirestore db;
+    NavController navController;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -101,7 +105,7 @@ public class ChangeProfileFragment extends Fragment {
         });
 
 
-
+        NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment_host_container);
         mUserEmail.setText(mFirebaseUser.getEmail());
         String user = mFirebaseAuth.getUid();
         DocumentReference docRef = db.collection("user").document(user);
@@ -125,9 +129,6 @@ public class ChangeProfileFragment extends Fragment {
                 }
             }
         });
-
-
-        mUserEmail.setText(mFirebaseUser.getEmail());
         mBtnAccept.setOnClickListener(v->{
             changeUserFromDBV2(mUserEmail.getText().toString(),mUserName.getText().toString(),mUserBirth.getText().toString(),mUserPhone.getText().toString(),mUserNote.getText().toString(),user);
         });
@@ -138,43 +139,6 @@ public class ChangeProfileFragment extends Fragment {
 
     }
 
-    public void changeUserFromDB(String Email,String Name,String Birth, String Phone, String Note,String user){
-        Map<String,Object> dataMap = new HashMap<>();
-        dataMap.put("email",Email);
-        dataMap.put("name",Name);
-        dataMap.put("birth",Birth);
-        dataMap.put("phone",Phone);
-        dataMap.put("Note", Note);
-        db.collection("user")
-                .whereEqualTo("name",Name)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful() && !task.getResult().isEmpty()){
-                            DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
-                            db.collection("user")
-                                    .document(user)
-                                    .update(dataMap)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            Toast.makeText(requireContext(), "Update thành công", Toast.LENGTH_SHORT).show();
-
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(requireContext(), "Update thất bại", Toast.LENGTH_SHORT).show();
-
-                                        }
-                                    });
-                        }
-                        else{
-                            Toast.makeText(requireContext(), "Update fail", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
     public void changeUserFromDBV2(String Email,String Name,String Birth, String Phone, String Note,String user){
         uploadImage();
         Map<String,Object> dataMap = new HashMap<>();
@@ -197,6 +161,7 @@ public class ChangeProfileFragment extends Fragment {
 
                     }
                 });
+        navController.navigate(R.id.userFragment);
     }
 
     private void uploadImage() {

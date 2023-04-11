@@ -25,64 +25,70 @@
         android:layout_height="100dp"/>
 
     <androidx.gridlayout.widget.GridLayout
-        android:layout_width="match_parent"
-        android:background="@drawable/stroke"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/stroke">
+
         <ImageView
             android:id="@+id/imageView11"
+            style="@style/user_text_option"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/camera"
             app:layout_column="0"
-            app:layout_row="0"
-            style="@style/user_text_option"/>
+            app:layout_row="0" />
+
         <ImageView
             android:id="@+id/imageView6"
+            style="@style/user_text_option"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:layout_column="0"
-            app:layout_row="1"
             android:src="@drawable/users"
-            style="@style/user_text_option"/>
+            app:layout_column="0"
+            app:layout_row="1" />
+
         <ImageView
             android:id="@+id/imageView7"
+            style="@style/user_text_option"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:layout_column="0"
-            app:layout_row="2"
             android:src="@drawable/email"
-            style="@style/user_text_option"/>
+            app:layout_column="0"
+            app:layout_row="2" />
 
         <ImageView
             android:id="@+id/imageView8"
+            style="@style/user_text_option"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            app:layout_column="0"
-            app:layout_row="3"
             android:src="@drawable/phone"
-            style="@style/user_text_option"/>
+            app:layout_column="0"
+            app:layout_row="3" />
+
         <ImageView
             android:id="@+id/imageView9"
+            style="@style/user_text_option"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/date"
             app:layout_column="0"
-            app:layout_row="4"
-            style="@style/user_text_option"/>
+            app:layout_row="4" />
+
         <ImageView
             android:id="@+id/imageView10"
+            style="@style/user_text_option"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/note_120060"
             app:layout_column="0"
-            app:layout_row="5"
-            style="@style/user_text_option"/>
+            app:layout_row="5" />
 
         <TextView
             android:id="@+id/link"
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:ems="10"
             android:fontFamily="@font/notoserif"
             android:minHeight="48dp"
@@ -90,9 +96,10 @@
             android:textSize="18dp"
             app:layout_column="1"
             app:layout_row="0" />
+
         <EditText
             android:id="@+id/edt_user_name"
-            android:layout_width="300dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="@font/notoserif"
@@ -105,11 +112,11 @@
 
         <EditText
             android:id="@+id/edt_user_email"
-            android:enabled="false"
-            android:layout_width="300dp"
-            android:fontFamily="@font/notoserif"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:enabled="false"
+            android:fontFamily="@font/notoserif"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:text="01689674504zx@gmail.com"
@@ -118,7 +125,7 @@
 
         <EditText
             android:id="@+id/edt_user_phone"
-            android:layout_width="300dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:ems="10"
             android:fontFamily="@font/notoserif"
@@ -131,10 +138,10 @@
 
         <EditText
             android:id="@+id/edt_user_birth"
-            android:layout_width="300dp"
-            android:fontFamily="@font/notoserif"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/notoserif"
             android:hint="Nhập ngày sinh"
             android:inputType="date"
             android:minHeight="48dp"
@@ -144,10 +151,10 @@
 
         <EditText
             android:id="@+id/edt_user_note"
-            android:layout_width="300dp"
-            android:fontFamily="@font/notoserif"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/notoserif"
             android:hint="Giới thiệu về bản thân"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -156,48 +163,46 @@
             app:layout_row="5" />
 
 
+        <!--            <RadioGroup-->
+        <!--                android:id="@+id/radio"-->
+        <!--                android:layout_width="280dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:orientation="horizontal"-->
+        <!--                app:layout_column="1"-->
+        <!--                app:layout_row="5">-->
 
-<!--            <RadioGroup-->
-<!--                android:id="@+id/radio"-->
-<!--                android:layout_width="300dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                app:layout_column="1"-->
-<!--                app:layout_row="5">-->
+        <!--                <RadioButton-->
+        <!--                    android:id="@+id/btn_male"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_gravity="left"-->
+        <!--                    android:text="Nam" />-->
 
-<!--                <RadioButton-->
-<!--                    android:id="@+id/btn_male"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="left"-->
-<!--                    android:text="Nam" />-->
-
-<!--                <RadioButton-->
-<!--                    android:id="@+id/btn_gay"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Nữ" />-->
-<!--                <RadioButton-->
-<!--                    android:id="@+id/btn_female"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:text="Giới tính khác" />-->
-<!--            </RadioGroup>-->
+        <!--                <RadioButton-->
+        <!--                    android:id="@+id/btn_gay"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:text="Nữ" />-->
+        <!--                <RadioButton-->
+        <!--                    android:id="@+id/btn_female"-->
+        <!--                    android:layout_width="wrap_content"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_gravity="center"-->
+        <!--                    android:text="Giới tính khác" />-->
+        <!--            </RadioGroup>-->
 
         <Button
             android:id="@+id/btn_save_chage_profile"
             android:layout_width="134dp"
-            android:layout_marginTop="40dp"
             android:layout_height="wrap_content"
-            android:text="Lưu"
+            android:layout_marginTop="40dp"
             android:fontFamily="@font/notoserif"
+            android:text="Lưu"
             app:layout_column="1"
             app:layout_row="6" />
 
 
     </androidx.gridlayout.widget.GridLayout>
-
 
 
 </LinearLayout>

@@ -4,6 +4,7 @@
     android:layout_height="180dp"
     android:orientation="horizontal"
     android:layout_margin="10dp"
+    android:background="@drawable/stroke"
     android:padding="20dp">
 
     <LinearLayout

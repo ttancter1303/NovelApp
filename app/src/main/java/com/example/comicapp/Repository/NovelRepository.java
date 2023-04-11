@@ -136,9 +136,11 @@ public class NovelRepository {
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         List<Novel> novels = new ArrayList<>();
                         for (DocumentSnapshot document : value.getDocuments()) {
+                            String date = document.get("date_saved",String.class);
                             mFirestore.collection("novel").document(document.get("novel_id",String.class)).addSnapshotListener(new EventListener<DocumentSnapshot>() {
                                 @Override
                                 public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+
                                     String id = value.getId();
                                     String gioiThieu = value.get("intro", String.class);
                                     String image = value.get("image", String.class);
@@ -146,7 +148,7 @@ public class NovelRepository {
                                     Boolean status = value.get("status", Boolean.class);
                                     String type = value.get("type",String.class);
                                     DocumentReference author = value.get("author", DocumentReference.class);
-                                    Novel novel = new Novel(id, name, gioiThieu, image,type, author, status);
+                                    Novel novel = new Novel(id, name, gioiThieu, image,type,date, author, status);
                                     value.getReference().collection("chapter")
                                             .addSnapshotListener(new EventListener<QuerySnapshot>() {
                                                 @Override

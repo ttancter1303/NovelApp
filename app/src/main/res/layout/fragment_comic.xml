@@ -41,11 +41,14 @@
                 android:layout_margin="5dp"
                 android:text="Các bạn đợi 1 chút nhé...."
                 android:textSize="15sp"
+                android:fontFamily="@font/notoserif" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/txt_time"
+                android:layout_margin="5dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/notoserif"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                android:text="Các bạn đợi 1 chút nhé..."/>
 
 <!--            <TextView-->
 <!--                android:id="@+id/txt_read"-->
