@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class SharedViewModel extends ViewModel {
-    private MutableLiveData<String> text = new MutableLiveData<>();
+    private MutableLiveData<String> stringID = new MutableLiveData<>();
     public void setData(String item){
-        text.setValue(item);
+        stringID.setValue(item);
     }
     public LiveData<String> getSelectedItem(){
-        return text;
+        return stringID;
     }
 }

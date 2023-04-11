@@ -82,15 +82,6 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.HomeVi
                             @Override
                             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                                 Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                                try {
-                                    FileOutputStream out = new FileOutputStream(localFile.getAbsolutePath());
-                                    bitmap.compress(Bitmap.CompressFormat.JPEG,100,out);
-
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
-
-//                                mImage.setImageBitmap(bitmap);
                                 Glide.with(mImage.getContext())
                                         .load(bitmap)
                                         .centerCrop()
@@ -99,7 +90,7 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.HomeVi
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Log.d("PhucDVb", "onFailure: ", e);
+                                Log.d("Ttan", "onFailure: ", e);
                             }
                         });
             } catch (IOException e) {

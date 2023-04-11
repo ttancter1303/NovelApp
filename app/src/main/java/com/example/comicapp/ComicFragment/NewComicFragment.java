@@ -11,19 +11,27 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.bumptech.glide.Glide;
 import com.example.comicapp.R;
+import com.example.comicapp.Repository.ViewModel.SharedViewModel;
 import com.example.comicapp.data.Novel;
 import com.example.comicapp.databinding.NewComicBinding;
 import com.example.comicapp.databinding.NewComicDetailBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -40,7 +48,11 @@ public class NewComicFragment extends Fragment {
     Button mAddToLibrary;
     ImageView mImage;
     NewComicDetailBinding binding;
-    StorageReference storageRef;
+    StorageReference mStorageReference;
+    SharedViewModel sharedViewModel;
+    FirebaseStorage storage;
+    FirebaseFirestore db;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,7 +65,8 @@ public class NewComicFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = NewComicDetailBinding.inflate(inflater,container,false);
-
+        db = FirebaseFirestore.getInstance();
+        storage = FirebaseStorage.getInstance();
         return binding.getRoot();
     }
 
@@ -61,9 +74,6 @@ public class NewComicFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Intent intent = requireActivity().getIntent();
-
-
-
         mHeader = binding.txtHeader;
         mSubTitle = binding.txtSubtitle;
         mRead = binding.btnRead;
@@ -74,9 +84,87 @@ public class NewComicFragment extends Fragment {
 
         // @TODO Thay thanh id muon truyen qua comicDetailFragment
         Novel novel = new Novel();
-        novel.setId("7RijD0lXUf6zZUHsTqJW");
+//        novel.setId("7RijD0lXUf6zZUHsTqJW");
         Bundle bundle = new Bundle();
-        bundle.putString("id", novel.getId());
+//        bundle.putString("id", novel.getId());
+
+
+        getParentFragmentManager().setFragmentResultListener("idFromHome", requireActivity(), new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
+                String data = result.getString("id");
+                DocumentReference docRef = db.collection("novel").document(data);
+                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        novel.setId(data);
+                        bundle.putString("id", novel.getId());
+                        mHeader.setText(data);
+                        mSubTitle.setText(novel.getIntro());
+                        mStorageReference = storage.getReference(novel.getImage());
+                        try {
+                            final File localFile = File.createTempFile("temp1","jpg");
+                            mStorageReference.getFile(localFile)
+                                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                            Glide.with(mImage.getContext())
+                                                    .load(bitmap)
+                                                    .centerCrop()
+                                                    .into(mImage);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.d("Ttan", "onFailure: ", e);
+                                        }
+                                    });
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(requireContext(), "Load truyện thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
+
+
+//        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+//        sharedViewModel.getSelectedItem().observe(getViewLifecycleOwner(),item->{
+//            novel.setId(sharedViewModel.getSelectedItem().getValue());
+//            bundle.putString("id", novel.getId());
+//            mHeader.setText(novel.getname());
+//            mSubTitle.setText(novel.getIntro());
+//            mStorageReference = storage.getReference(novel.getImage());
+//            try {
+//                final File localFile = File.createTempFile("temp1","jpg");
+//                mStorageReference.getFile(localFile)
+//                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+//                            @Override
+//                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+//                                Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+//                                Glide.with(mImage.getContext())
+//                                        .load(bitmap)
+//                                        .centerCrop()
+//                                        .into(mImage);
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                Log.d("Ttan", "onFailure: ", e);
+//                            }
+//                        });
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        });
 
         mHeader.setOnClickListener(v->{
             if(mOnItemClickListener != null){

@@ -67,9 +67,12 @@ public class HomeFragment extends Fragment {
 //        sharedViewModel.getSelectedItem().observe(getViewLifecycleOwner(),item->{
 //
 //        });
+        //viewmodel share dữ liệu
+
+
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
         mModel = new ViewModelProvider(this).get(ItemClickAllNovelViewModel.class);
-
         mAllNovelAdapter.setOnItemClickListener(new HistoryRecycleAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Novel novel) {
@@ -77,9 +80,11 @@ public class HomeFragment extends Fragment {
                 mModel.getSelectedItem().observe(getViewLifecycleOwner(), item -> {
                     item.setChapters(novel.getChapters());
                 });
+
                 Bundle bundle = new Bundle();
                 bundle.putString("id",novel.getId());
                 mController.navigate(R.id.comicDetailFragment,bundle);
+
             }
         });
 
@@ -107,10 +112,15 @@ public class HomeFragment extends Fragment {
         mNewNovelAdapter.setOnItemClickListener(new NewNovelAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Novel novel) {
-
+                sharedViewModel.setData(novel.getId());
+                novel.getId();
                 Bundle bundle = new Bundle();
                 bundle.putString("id",novel.getId());
-                mController.navigate(R.id.comicDetailFragment,bundle);
+                getParentFragmentManager().setFragmentResult("idFromHome",bundle);
+
+
+//                mController.navigate(R.id.comicDetailFragment,bundle);
+
             }
         });
     }
