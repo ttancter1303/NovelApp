@@ -7,6 +7,7 @@
     tools:context=".UserFragment.UserFragment"
     android:orientation="vertical">
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,33 +16,84 @@
         android:layout_margin="10dp"
         android:textStyle="bold"
         style="@style/header"/>
-    <TextView
-        android:id="@+id/txt_change_profile"
-        android:layout_width="match_parent"
-        android:fontFamily="@font/notoserif"
-        android:layout_height="wrap_content"
-        android:text="Sửa hồ sơ"
-        style="@style/user_text_option"/>
-<!--    <TextView-->
-<!--        android:id="@+id/txt_setting"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        style="@style/user_text_option"-->
-<!--        android:text="Cài đặt"/>-->
-    <TextView
-        android:id="@+id/txt_change_password"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/notoserif"
-        android:text="Đổi mật khẩu"
-        style="@style/user_text_option"/>
-    <TextView
-        android:id="@+id/txt_logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/user_text_option"
-        android:fontFamily="@font/notoserif"
-        android:text="Đăng xuất"/>
+        android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="50dp">
+
+                <ImageView
+                    android:id="@+id/img_user"
+                    android:layout_width="150dp"
+
+                    android:layout_height="150dp"
+                    android:src="@drawable/slime300" />
+            </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_name"
+            android:text="TtanGutts"
+            android:layout_gravity="center"
+            android:fontFamily="@font/notoserif"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_status"
+            android:text="Write something"
+            android:textStyle="italic"
+            android:layout_gravity="center"
+            android:fontFamily="@font/notoserif"
+            android:textSize="15dp"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_gravity="center"
+        android:layout_height="300dp"
+        android:background="@drawable/stroke"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_change_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sửa hồ sơ"
+            android:background="@drawable/stroke"
+            style="@style/user_text_option"/>
+        <!--    <TextView-->
+        <!--        android:id="@+id/txt_setting"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        style="@style/user_text_option"-->
+        <!--        android:text="Cài đặt"/>-->
+        <TextView
+            android:id="@+id/txt_change_password"
+            android:background="@drawable/stroke"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đổi mật khẩu"
+            style="@style/user_text_option"/>
+        <TextView
+            android:id="@+id/txt_logout"
+            android:layout_width="match_parent"
+            android:background="@drawable/stroke"
+            android:layout_height="wrap_content"
+            style="@style/user_text_option"
+            android:fontFamily="@font/notoserif"
+            android:text="Đăng xuất"/>
+    </LinearLayout>
 
 
 

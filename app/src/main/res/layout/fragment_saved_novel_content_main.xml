@@ -111,7 +111,7 @@
                     android:layout_height="35dp"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="@font/notoserif"
-                    android:background="@drawable/border_radius_red"
+                    android:background="@drawable/shadow"
                     android:backgroundTint="#FF0000"
                     android:text="Xóa khỏi tủ truyện"
                     android:textSize="8sp"

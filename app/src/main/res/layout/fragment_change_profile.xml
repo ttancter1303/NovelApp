@@ -16,19 +16,32 @@
         android:fontFamily="@font/notoserif"
         android:textSize="35sp"
         android:gravity="center_horizontal"
-        android:layout_marginBottom="40dp"
         />
+    <ImageView
+        android:layout_width="100dp"
+        android:id="@+id/img_user"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:layout_height="100dp"/>
 
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="match_parent"
+        android:background="@drawable/stroke"
         android:layout_height="match_parent">
-
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/camera"
+            app:layout_column="0"
+            app:layout_row="0"
+            style="@style/user_text_option"/>
         <ImageView
             android:id="@+id/imageView6"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_column="0"
-            app:layout_row="0"
+            app:layout_row="1"
             android:src="@drawable/users"
             style="@style/user_text_option"/>
         <ImageView
@@ -36,7 +49,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_column="0"
-            app:layout_row="1"
+            app:layout_row="2"
             android:src="@drawable/email"
             style="@style/user_text_option"/>
 
@@ -45,7 +58,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_column="0"
-            app:layout_row="2"
+            app:layout_row="3"
             android:src="@drawable/phone"
             style="@style/user_text_option"/>
         <ImageView
@@ -54,7 +67,7 @@
             android:layout_height="50dp"
             android:src="@drawable/date"
             app:layout_column="0"
-            app:layout_row="3"
+            app:layout_row="4"
             style="@style/user_text_option"/>
         <ImageView
             android:id="@+id/imageView10"
@@ -62,9 +75,21 @@
             android:layout_height="50dp"
             android:src="@drawable/note_120060"
             app:layout_column="0"
-            app:layout_row="4"
+            app:layout_row="5"
             style="@style/user_text_option"/>
 
+        <TextView
+            android:id="@+id/link"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:fontFamily="@font/notoserif"
+            android:minHeight="48dp"
+            android:text=" Chọn ảnh đại diện"
+            android:textSize="18dp"
+            app:layout_column="1"
+            app:layout_row="0" />
         <EditText
             android:id="@+id/edt_user_name"
             android:layout_width="300dp"
@@ -76,7 +101,7 @@
             android:minHeight="48dp"
             android:text="TtanGutts"
             app:layout_column="1"
-            app:layout_row="0" />
+            app:layout_row="1" />
 
         <EditText
             android:id="@+id/edt_user_email"
@@ -89,7 +114,7 @@
             android:minHeight="48dp"
             android:text="01689674504zx@gmail.com"
             app:layout_column="1"
-            app:layout_row="1" />
+            app:layout_row="2" />
 
         <EditText
             android:id="@+id/edt_user_phone"
@@ -102,7 +127,7 @@
             android:minHeight="48dp"
             android:text=""
             app:layout_column="1"
-            app:layout_row="2" />
+            app:layout_row="3" />
 
         <EditText
             android:id="@+id/edt_user_birth"
@@ -115,7 +140,7 @@
             android:minHeight="48dp"
             android:text=""
             app:layout_column="1"
-            app:layout_row="3" />
+            app:layout_row="4" />
 
         <EditText
             android:id="@+id/edt_user_note"
@@ -128,7 +153,9 @@
             android:minHeight="48dp"
             android:text=""
             app:layout_column="1"
-            app:layout_row="4" />
+            app:layout_row="5" />
+
+
 
 <!--            <RadioGroup-->
 <!--                android:id="@+id/radio"-->
@@ -166,7 +193,7 @@
             android:text="Lưu"
             android:fontFamily="@font/notoserif"
             app:layout_column="1"
-            app:layout_row="5" />
+            app:layout_row="6" />
 
 
     </androidx.gridlayout.widget.GridLayout>

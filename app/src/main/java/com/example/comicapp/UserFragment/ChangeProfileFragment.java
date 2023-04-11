@@ -1,5 +1,6 @@
 package com.example.comicapp.UserFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.comicapp.data.User;
@@ -29,12 +31,15 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class ChangeProfileFragment extends Fragment {
+    private static final int PICK_IMAGE_REQUEST = 22;
     FragmentChangeProfileBinding binding;
     Button mBtnAccept;
 
@@ -46,17 +51,18 @@ public class ChangeProfileFragment extends Fragment {
     DocumentReference docRef;
     FirebaseUser mFirebaseUser;
     FirebaseAuth mFirebaseAuth;
-    RadioGroup mGroup;
-    RadioButton mMale;
-    RadioButton mFamale;
-    RadioButton mGay;
+    TextView btnSelect;
+    StorageReference storageRef;
+    FirebaseStorage storage;
     FirebaseFirestore db;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFirebaseAuth = FirebaseAuth.getInstance();
+        storage = FirebaseStorage.getInstance();
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        StorageReference storageRef = storage.getReference();
         db = FirebaseFirestore.getInstance();
     }
 
@@ -81,9 +87,18 @@ public class ChangeProfileFragment extends Fragment {
         mUserBirth = binding.edtUserBirth;
         mUserPhone = binding.edtUserPhone;
         mUserNote = binding.edtUserNote;
+        btnSelect = binding.link;
 //        mGroup = binding.radio;
 //        mMale = binding.btnMale;
 //        mFamale = binding.btnFemale;
+
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                SelectImage();
+            }
+        });
 
 
 
@@ -116,6 +131,10 @@ public class ChangeProfileFragment extends Fragment {
         mBtnAccept.setOnClickListener(v->{
             changeUserFromDBV2(mUserEmail.getText().toString(),mUserName.getText().toString(),mUserBirth.getText().toString(),mUserPhone.getText().toString(),mUserNote.getText().toString(),user);
         });
+
+    }
+
+    private void SelectImage() {
 
     }
 
@@ -157,6 +176,7 @@ public class ChangeProfileFragment extends Fragment {
                 });
     }
     public void changeUserFromDBV2(String Email,String Name,String Birth, String Phone, String Note,String user){
+        uploadImage();
         Map<String,Object> dataMap = new HashMap<>();
         dataMap.put("email",Email);
         dataMap.put("name",Name);
@@ -177,5 +197,8 @@ public class ChangeProfileFragment extends Fragment {
 
                     }
                 });
+    }
+
+    private void uploadImage() {
     }
 }

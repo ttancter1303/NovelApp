@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="15dp"
         android:orientation="vertical">
 
         <TextView
@@ -36,8 +37,11 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView2"
             android:name="com.example.comicapp.ComicFragment.NewComicFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            tools:layout="@layout/new_comic_detail"
+            />
 
         <TextView
             android:layout_width="match_parent"

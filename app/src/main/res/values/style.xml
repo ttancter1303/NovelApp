@@ -5,7 +5,7 @@
         <item name="android:padding">10dp</item>
         <item name="android:textSize">20dp</item>
         <item name="android:fontFamily">@font/notoserif</item>
-        <item name="background">@drawable/text_line</item>
+        <item name="background">@drawable/stroke</item>
     </style>
     <style name="header">
         <item name="android:textSize">35sp</item>

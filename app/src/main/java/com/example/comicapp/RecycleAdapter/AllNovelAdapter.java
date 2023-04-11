@@ -1,6 +1,5 @@
 package com.example.comicapp.RecycleAdapter;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -21,10 +20,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +39,7 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.HomeVi
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         storage = FirebaseStorage.getInstance();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_read_highest,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_all_novel,parent,false);
         return new HomeViewHolder(view);
     }
 
