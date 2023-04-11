@@ -17,6 +17,8 @@
             android:layout_width="336dp"
             android:layout_height="wrap_content"
             style="@style/header"
+            android:fontFamily="@font/notoserif"
+            android:textStyle="bold"
             android:text="Tủ Truyện"
              />
 

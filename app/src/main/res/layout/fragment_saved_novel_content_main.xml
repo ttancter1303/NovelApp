@@ -52,6 +52,7 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/border_radius"
                     android:gravity="center"
+                    android:fontFamily="@font/notoserif"
                     android:text="....."
                     android:textColor="@color/white"
 
@@ -62,6 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:fontFamily="@font/notoserif"
                     android:text="@string/ComicName"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -71,12 +73,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:fontFamily="@font/notoserif"
                     android:text="bởi Trí Bạch" />
 
                 <TextView
                     android:id="@+id/typeNovel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/notoserif"
                     android:layout_margin="5dp"
                     android:text="Thể loại : " />
 
@@ -106,6 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/notoserif"
                     android:background="@drawable/border_radius_red"
                     android:backgroundTint="#FF0000"
                     android:text="Xóa khỏi tủ truyện"
@@ -186,6 +191,7 @@
             android:layout_margin="10dp">
             <TextView
                 android:id="@+id/txt_intro"
+                android:fontFamily="@font/notoserif"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/gioi_thieu" />
@@ -213,6 +219,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
+                android:fontFamily="@font/notoserif"
                 android:text="Số Chương : "
                 android:textStyle="bold"/>
 

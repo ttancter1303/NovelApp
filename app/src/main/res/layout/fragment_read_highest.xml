@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="200dp"
+    android:layout_width="160dp"
     android:layout_height="wrap_content"
+
+    app:circularflow_defaultRadius="10dp"
     tools:context=".HomeFragment.ReadHighestFragment"
     android:orientation="vertical">
 
@@ -11,8 +13,10 @@
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"
-        android:layout_height="250dp"
-        android:layout_margin="5dp"
+        android:layout_height="200dp"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        android:layout_marginLeft="5dp"
         style="border"
         android:src="@drawable/slime300"
         />
@@ -21,6 +25,9 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="14sp"
+        android:textColor="@color/dark_grey"
+        android:fontFamily="@font/notoserifkhojki"
+        android:layout_marginLeft="5dp"
         android:text="Slime 300" />
 </LinearLayout>

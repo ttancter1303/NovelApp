@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sửa hồ sơ"
+        android:fontFamily="@font/notoserif"
         android:textSize="35sp"
         android:gravity="center_horizontal"
         android:layout_marginBottom="40dp"
@@ -69,6 +70,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/notoserif"
             android:hint="Nhập tên của bạn"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -80,6 +82,7 @@
             android:id="@+id/edt_user_email"
             android:enabled="false"
             android:layout_width="300dp"
+            android:fontFamily="@font/notoserif"
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
@@ -93,6 +96,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:fontFamily="@font/notoserif"
             android:hint="Nhập số điện thoại"
             android:inputType="textPersonName"
             android:minHeight="48dp"
@@ -103,6 +107,7 @@
         <EditText
             android:id="@+id/edt_user_birth"
             android:layout_width="300dp"
+            android:fontFamily="@font/notoserif"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Nhập ngày sinh"
@@ -115,6 +120,7 @@
         <EditText
             android:id="@+id/edt_user_note"
             android:layout_width="300dp"
+            android:fontFamily="@font/notoserif"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Giới thiệu về bản thân"
@@ -158,6 +164,7 @@
             android:layout_marginTop="40dp"
             android:layout_height="wrap_content"
             android:text="Lưu"
+            android:fontFamily="@font/notoserif"
             app:layout_column="1"
             app:layout_row="5" />
 

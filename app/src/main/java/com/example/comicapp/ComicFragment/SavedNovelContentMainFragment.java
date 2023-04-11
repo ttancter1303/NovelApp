@@ -223,12 +223,12 @@ public class SavedNovelContentMainFragment extends Fragment {
                 .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(requireContext(), "Xoa truyen thanh cong", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Xóa truyện thành công", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(requireContext(), "Xoa truyen that bai", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(requireContext(), "Xóa truyện thất bại", Toast.LENGTH_SHORT).show();
 
                     }
                 });

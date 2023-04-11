@@ -27,7 +27,7 @@ public class ReadNovelFragment extends Fragment {
     TextView mContent;
     TextView mPre;
     TextView mNext;
-    TextView mMain;
+    TextView mHeader;
     FirebaseStorage storage;
     FirebaseFirestore db;
     public static Chapter chapter;
@@ -53,6 +53,7 @@ public class ReadNovelFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mContent = binding.txtContent;
+        mHeader = binding.txtHeader;
 //        mPre = binding.txtChuongTruoc;
 //        mNext = binding.txtChuongSau;
 //        mMain = binding.txtMain;
@@ -67,6 +68,7 @@ public class ReadNovelFragment extends Fragment {
                 Log.d("ttan", "onSuccess: "+documentSnapshot.toString());
                 chapter = documentSnapshot.toObject(Chapter.class);
                 mContent.setText(chapter.getContent());
+                mHeader.setText("Chương "+chapter.getName());
             }
         });
 

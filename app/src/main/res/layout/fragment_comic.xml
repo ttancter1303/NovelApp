@@ -41,6 +41,7 @@
                 android:layout_margin="5dp"
                 android:text="Các bạn đợi 1 chút nhé...."
                 android:textSize="15sp"
+                android:fontFamily="@font/notoserif"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

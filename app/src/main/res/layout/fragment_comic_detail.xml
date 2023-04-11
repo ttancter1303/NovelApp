@@ -46,6 +46,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
+                    android:fontFamily="@font/notoserif"
                     android:id="@+id/txtStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -58,6 +59,7 @@
                     />
 
                 <TextView
+                    android:fontFamily="@font/notoserif"
                     android:id="@+id/textComicName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -67,6 +69,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:fontFamily="@font/notoserif"
                     android:id="@+id/textAuthor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -74,6 +77,7 @@
                     android:text="bởi Trí Bạch" />
 
                 <TextView
+                    android:fontFamily="@font/notoserif"
                     android:id="@+id/typeNovel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -183,6 +187,7 @@
         android:orientation="vertical"
         android:layout_margin="10dp">
         <TextView
+            android:fontFamily="@font/notoserif"
             android:id="@+id/txt_intro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -211,6 +216,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:fontFamily="@font/notoserif"
             android:text="Số Chương : "
             android:textStyle="bold"/>
 

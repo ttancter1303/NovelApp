@@ -5,59 +5,65 @@
     android:layout_height="match_parent"
     tools:context=".HomeFragment.HomeFragment"
     android:orientation="vertical">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Home"
+        android:orientation="vertical">
 
-        android:textStyle="bold"
-        style="@style/header"
-        />
-    <TextView
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Truyện mới"
-        android:textSize="20sp"
-        android:layout_marginBottom="5dp"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rev_newComic"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <TextView
+            style="@style/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notoserif"
+            android:text="Home"
+            android:textStyle="bold" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView2"
-        android:name="com.example.comicapp.ComicFragment.NewComicFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Tất cả truyện"
-        android:textSize="20sp"
-        android:layout_marginBottom="5dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="Truyện mới"
+            android:fontFamily="@font/notoserif"
+            android:textSize="20sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rev_read_highest"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rev_newComic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/txt_recommend"-->
-<!--        android:textSize="20sp"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Đề cử"/>-->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView2"
+            android:name="com.example.comicapp.ComicFragment.NewComicFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-<!--    <androidx.fragment.app.FragmentContainerView-->
-<!--        android:id="@+id/fragmentContainerView"-->
-<!--        android:name="com.example.comicapp.HomeFragment.RecommendFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content" />-->
-</LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="Tất cả truyện"
+            android:fontFamily="@font/notoserif"
+            android:textSize="20sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rev_read_highest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!--    <TextView-->
+        <!--        android:id="@+id/txt_recommend"-->
+        <!--        android:textSize="20sp"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:text="Đề cử"/>-->
+
+        <!--    <androidx.fragment.app.FragmentContainerView-->
+        <!--        android:id="@+id/fragmentContainerView"-->
+        <!--        android:name="com.example.comicapp.HomeFragment.RecommendFragment"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content" />-->
+    </LinearLayout>
 
 </ScrollView>

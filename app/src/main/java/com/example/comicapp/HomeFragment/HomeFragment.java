@@ -1,16 +1,12 @@
 package com.example.comicapp.HomeFragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -21,11 +17,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.comicapp.ComicFragment.NewComicFragment;
 import com.example.comicapp.R;
 import com.example.comicapp.RecycleAdapter.HistoryRecycleAdapter;
-import com.example.comicapp.RecycleAdapter.HomeReadHighestAdapter;
 import com.example.comicapp.RecycleAdapter.AllNovelAdapter;
+import com.example.comicapp.RecycleAdapter.NewNovelAdapter;
 import com.example.comicapp.Repository.ViewModel.ItemClickAllNovelViewModel;
 import com.example.comicapp.Repository.ViewModel.NovelViewModel;
 import com.example.comicapp.Repository.ViewModel.SharedViewModel;
@@ -39,8 +34,8 @@ public class HomeFragment extends Fragment {
     NovelViewModel mViewModel;
     RecyclerView mRecyclerViewAllNovel;
     RecyclerView mRecyclerViewReadHighest;
+    NewNovelAdapter mNewNovelAdapter;
     AllNovelAdapter mAllNovelAdapter;
-    HomeReadHighestAdapter homeReadHighestAdapter;
     NavController mController;
     SharedViewModel sharedViewModel;
 
@@ -59,13 +54,13 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mController = Navigation.findNavController(requireActivity(), R.id.fragment_host_container);
         mRecyclerViewAllNovel = view.findViewById(R.id.rev_newComic);
-        mAllNovelAdapter = new AllNovelAdapter();
-        mRecyclerViewAllNovel.setAdapter(mAllNovelAdapter);
+        mNewNovelAdapter = new NewNovelAdapter();
+        mRecyclerViewAllNovel.setAdapter(mNewNovelAdapter);
         mRecyclerViewAllNovel.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
 
         mRecyclerViewReadHighest = view.findViewById(R.id.rev_read_highest);
-        homeReadHighestAdapter = new HomeReadHighestAdapter();
-        mRecyclerViewReadHighest.setAdapter(homeReadHighestAdapter);
+        mAllNovelAdapter = new AllNovelAdapter();
+        mRecyclerViewReadHighest.setAdapter(mAllNovelAdapter);
         mRecyclerViewReadHighest.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
 
 //        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
@@ -75,7 +70,7 @@ public class HomeFragment extends Fragment {
 
         mModel = new ViewModelProvider(this).get(ItemClickAllNovelViewModel.class);
 
-        homeReadHighestAdapter.setOnItemClickListener(new HistoryRecycleAdapter.OnItemClickListener() {
+        mAllNovelAdapter.setOnItemClickListener(new HistoryRecycleAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Novel novel) {
                 // cần sử dụng shared viewmodel để truyền data tới
@@ -94,7 +89,7 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onChanged(List<Novel> novels) {
                     for (Novel novel : novels) {
-                        homeReadHighestAdapter.setData(novels);
+                        mAllNovelAdapter.setData(novels);
                     }
                 }
             });
@@ -103,13 +98,13 @@ public class HomeFragment extends Fragment {
             mViewModel.getNewNovel().observe(getViewLifecycleOwner(), new Observer<List<Novel>>() {
                 @Override
                 public void onChanged(List<Novel> novels) {
-                    mAllNovelAdapter.setData(novels);
+                    mNewNovelAdapter.setData(novels);
                 }
             });
         }
 
 
-        mAllNovelAdapter.setOnItemClickListener(new AllNovelAdapter.OnItemClickListener() {
+        mNewNovelAdapter.setOnItemClickListener(new NewNovelAdapter.OnItemClickListener() {
             @Override
             public void onClick(View view, Novel novel) {
 

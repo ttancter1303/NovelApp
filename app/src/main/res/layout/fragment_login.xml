@@ -9,6 +9,7 @@
 
     <TextView
         android:id="@+id/textView3"
+        android:fontFamily="@font/notoserif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_name"
@@ -20,6 +21,7 @@
 
 
     <EditText
+        android:fontFamily="@font/notoserif"
         android:id="@+id/edt_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,6 +35,7 @@
 
 
     <EditText
+        android:fontFamily="@font/notoserif"
         android:id="@+id/edt_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,6 +46,7 @@
         android:minHeight="48dp" />
 
     <TextView
+        android:fontFamily="@font/notoserif"
         android:id="@+id/txt_forgot_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,12 +61,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:fontFamily="@font/notoserif"
         android:text="Đăng nhập"
         android:layout_marginTop="20dp"/>
     <Button
         android:id="@+id/btn_register"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
+        android:fontFamily="@font/notoserif"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/grey"
         android:layout_marginTop="20dp"

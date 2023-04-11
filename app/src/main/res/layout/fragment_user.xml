@@ -11,10 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hồ sơ"
+        android:fontFamily="@font/notoserif"
+        android:layout_margin="10dp"
+        android:textStyle="bold"
         style="@style/header"/>
     <TextView
         android:id="@+id/txt_change_profile"
         android:layout_width="match_parent"
+        android:fontFamily="@font/notoserif"
         android:layout_height="wrap_content"
         android:text="Sửa hồ sơ"
         style="@style/user_text_option"/>
@@ -28,6 +32,7 @@
         android:id="@+id/txt_change_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/notoserif"
         android:text="Đổi mật khẩu"
         style="@style/user_text_option"/>
     <TextView
@@ -35,6 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/user_text_option"
+        android:fontFamily="@font/notoserif"
         android:text="Đăng xuất"/>
 
 

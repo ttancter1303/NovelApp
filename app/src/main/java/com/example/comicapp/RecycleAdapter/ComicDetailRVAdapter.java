@@ -91,10 +91,10 @@ public class ComicDetailRVAdapter extends RecyclerView.Adapter<ComicDetailRVAdap
             }
         }
     }
-    private AllNovelAdapter.OnItemClickListener mOnItemClickListener;
+    private NewNovelAdapter.OnItemClickListener mOnItemClickListener;
 
 
-    public void setOnItemClickListener(AllNovelAdapter.OnItemClickListener onItemClickListener){
+    public void setOnItemClickListener(NewNovelAdapter.OnItemClickListener onItemClickListener){
         mOnItemClickListener = onItemClickListener;
     }
 

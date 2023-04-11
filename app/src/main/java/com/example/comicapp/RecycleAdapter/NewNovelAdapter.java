@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +24,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeReadHighestAdapter extends RecyclerView.Adapter<HomeReadHighestAdapter.HomeViewHolder>{
+public class NewNovelAdapter extends RecyclerView.Adapter<NewNovelAdapter.ViewHolder>{
     List<Novel> mData = new ArrayList<>();
     FirebaseStorage storage;
 
@@ -33,19 +32,17 @@ public class HomeReadHighestAdapter extends RecyclerView.Adapter<HomeReadHighest
         mData = data;
         notifyDataSetChanged();
     }
-
     @NonNull
     @Override
-    public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public NewNovelAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         storage = FirebaseStorage.getInstance();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_read_highest,parent,false);
-        return new HomeViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.new_comic,parent,false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NewNovelAdapter.ViewHolder holder, int position) {
         holder.bindView(mData.get(position));
-
     }
 
     @Override
@@ -53,26 +50,24 @@ public class HomeReadHighestAdapter extends RecyclerView.Adapter<HomeReadHighest
         return mData.size();
     }
 
-    public class HomeViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView mImage;
-        TextView mTxtHeader;
         StorageReference mStorageReference;
-        public HomeViewHolder(@NonNull View itemView) {
-            super(itemView);
-            mImage = itemView.findViewById(R.id.imageView3);
-            mTxtHeader = itemView.findViewById(R.id.textView);
-            itemView.setOnClickListener(v -> {
-                if(mOnItemClickListener != null){
-                    mOnItemClickListener.onClick(itemView, mData.get(getLayoutPosition()));
-                }
-            });
 
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mImage = itemView.findViewById(R.id.img_newComic);
+            itemView.setOnClickListener(v->{
+                if(mOnItemClickListener != null){
+                    mOnItemClickListener.onClick(itemView,mData.get(getLayoutPosition()));
+                }
+
+            });
         }
-        public void bindView(@NonNull Novel novel){
+        public void bindView(Novel novel){
             mStorageReference = storage.getReference(novel.getImage());
-            mTxtHeader.setText(novel.getname());
             try {
-                final File localFile = File.createTempFile("temp1","jpg");
+                final File localFile = File.createTempFile("temp","jpg");
                 mStorageReference.getFile(localFile)
                         .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                             @Override
@@ -91,13 +86,17 @@ public class HomeReadHighestAdapter extends RecyclerView.Adapter<HomeReadHighest
             }
         }
     }
-    private HistoryRecycleAdapter.OnItemClickListener mOnItemClickListener;
 
-    public void setOnItemClickListener(HistoryRecycleAdapter.OnItemClickListener onItemClickListener){
+
+
+    private OnItemClickListener mOnItemClickListener;
+
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
         mOnItemClickListener = onItemClickListener;
     }
-
     public interface OnItemClickListener {
-        public void onClick(View view, Novel novel);
+        void onClick(View view, Novel novel);
     }
+
 }
