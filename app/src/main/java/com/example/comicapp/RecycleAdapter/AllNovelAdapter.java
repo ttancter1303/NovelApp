@@ -71,6 +71,7 @@ public class AllNovelAdapter extends RecyclerView.Adapter<AllNovelAdapter.HomeVi
         }
         public void bindView(@NonNull Novel novel){
             mStorageReference = storage.getReference(novel.getImage());
+            Log.d("Ttan", "bindView: "+novel.getImage());
             mTxtHeader.setText(novel.getname());
             try {
                 final File localFile = File.createTempFile("temp1","jpg");

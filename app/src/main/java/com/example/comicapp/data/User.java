@@ -7,6 +7,7 @@ public class User {
     private int birth;
     private int phoneNumb;
     private String introduce;
+    private String image;
 
     public User(String id, String name, String email, int birth, int phoneNumb, String introduce) {
         this.id = id;
@@ -15,6 +16,24 @@ public class User {
         this.birth = birth;
         this.phoneNumb = phoneNumb;
         this.introduce = introduce;
+    }
+
+    public User(String id, String name, String email, int birth, int phoneNumb, String introduce, String image) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.birth = birth;
+        this.phoneNumb = phoneNumb;
+        this.introduce = introduce;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public User(String id, String name) {

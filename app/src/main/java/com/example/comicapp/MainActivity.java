@@ -1,23 +1,39 @@
 package com.example.comicapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+
+public class MainActivity extends AppCompatActivity implements SendData {
+    private static final int REQUEST_PHOTO_PICKER_SINGLE_SELECT = 22;
     private ViewPager2 viewPager2;
     private TabLayout tabLayout;
     FirebaseUser mFirebaseUser;
+    Uri currentUri;
     FirebaseAuth mFirebaseAuth;
+    private static final int PICK_IMAGE_REQUEST = 22;
+    private String StringPath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,10 +82,35 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            // Handle error
+            return;
+        }
+
+        switch(requestCode) {
+            case REQUEST_PHOTO_PICKER_SINGLE_SELECT:
+                // Get photo picker response for single select.
+                currentUri = data.getData();
+                //you got image path, now you may use this
+                StringPath = currentUri.toString();
+                Log.d("Ttan", "onActivityResult: "+StringPath);
+                return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     protected void onResume() {
         super.onResume();
 
+    }
+    public String getData(){
+        return StringPath;
+    }
+    @Override
+    public void sendData(String stringPath) {
+        stringPath = StringPath;
     }
 }

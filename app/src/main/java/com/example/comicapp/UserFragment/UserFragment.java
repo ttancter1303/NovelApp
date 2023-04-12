@@ -1,6 +1,8 @@
 package com.example.comicapp.UserFragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
 
@@ -17,16 +19,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.comicapp.LoginActivity;
 import com.example.comicapp.R;
 import com.example.comicapp.databinding.FragmentUserBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 public class UserFragment extends Fragment {
     TextView txtChangeProfile;
@@ -37,10 +48,12 @@ public class UserFragment extends Fragment {
     TextView txtChangePassword;
     TextView txtLogout;
     FragmentUserBinding binding;
-
+    StorageReference mStorageReference;
     FirebaseUser mFirebaseUser;
     FirebaseAuth mFirebaseAuth;
     FirebaseFirestore db;
+    FirebaseStorage storage;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +65,8 @@ public class UserFragment extends Fragment {
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        storage = FirebaseStorage.getInstance();
+        mStorageReference = storage.getReference();
         db = FirebaseFirestore.getInstance();
         // Inflate the layout for this fragment
         binding = FragmentUserBinding.inflate(inflater,container,false);
@@ -77,10 +92,33 @@ public class UserFragment extends Fragment {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        Log.d("ttan", "DocumentSnapshot data: " + document.getData());
                         txtName.setText(document.get("name").toString());
                         txtStatus.setText(document.get("note").toString());
-
+                        String imagePath = document.get("image").toString();
+                        Log.d("Ttan", "onComplete: "+imagePath);
+                        mStorageReference = storage.getReference(imagePath);
+                        try {
+                            final File localFile = File.createTempFile("temp1","jpg");
+                            mStorageReference.getFile(localFile)
+                                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                            Glide.with(imgUser.getContext())
+                                                    .load(bitmap)
+                                                    .centerCrop()
+                                                    .into(imgUser);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.d("Ttan", "onFailure: ", e);
+                                        }
+                                    });
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        Log.d("ttan", "DocumentSnapshot data: " + document.getData());
                     } else {
                         Log.d("ttan", "No such document");
                     }

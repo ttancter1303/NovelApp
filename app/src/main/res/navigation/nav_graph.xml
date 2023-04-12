@@ -11,14 +11,14 @@
         android:label="fragment_user"
         tools:layout="@layout/fragment_user">
         <action
-            android:id="@+id/action_userFragment_to_changeProfileFragment"
-            app:destination="@id/changeProfileFragment" />
-        <action
             android:id="@+id/action_userFragment_to_settingFragment"
             app:destination="@id/settingFragment" />
         <action
             android:id="@+id/action_userFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
+        <action
+            android:id="@+id/action_userFragment_to_changeProfileFragment"
+            app:destination="@id/changeProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/changeProfileFragment"
@@ -76,10 +76,6 @@
         android:name="com.example.comicapp.Login.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" />
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.example.comicapp.UserFragment.SettingsFragment"
-        android:label="SettingsFragment" />
     <fragment
         android:id="@+id/savedNovelContentMainFragment"
         android:name="com.example.comicapp.ComicFragment.SavedNovelContentMainFragment"

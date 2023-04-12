@@ -94,7 +94,7 @@ public class RegisterFragment extends Fragment {
                             Toast.makeText(requireContext(), "Đăng ký thành công", Toast.LENGTH_SHORT).show();
                             requireActivity().onBackPressed();
                         }else{
-                            Toast.makeText(requireContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(requireContext(), "Bạn nhập sai tài khoản hoặc là chưa đăng ký", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -107,6 +107,7 @@ public class RegisterFragment extends Fragment {
         dataMap.put("note","");
         dataMap.put("email",Email);
         dataMap.put("name",Name);
+        dataMap.put("image","user_image/149071.png");
         FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
         if(firebaseUser != null){
             mFirestore.collection("user")
