@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -52,7 +53,7 @@ public class NewComicFragment extends Fragment {
     SharedViewModel sharedViewModel;
     FirebaseStorage storage;
     FirebaseFirestore db;
-
+    String data;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,11 +74,11 @@ public class NewComicFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Intent intent = requireActivity().getIntent();
+
         mHeader = binding.txtHeader;
         mSubTitle = binding.txtSubtitle;
         mRead = binding.btnRead;
-        mAddToLibrary = binding.btnAddtoLibrary;
+//        mAddToLibrary = binding.btnAddtoLibrary;
         mImage = binding.imgComic;
 
         NavController navController =  Navigation.findNavController(requireActivity(),R.id.fragment_host_container);
@@ -86,55 +87,55 @@ public class NewComicFragment extends Fragment {
         Novel novel = new Novel();
 //        novel.setId("7RijD0lXUf6zZUHsTqJW");
         Bundle bundle = new Bundle();
-//        bundle.putString("id", novel.getId());
 
-
-        getParentFragmentManager().setFragmentResultListener("idFromHome", requireActivity(), new FragmentResultListener() {
-            @Override
-            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle result) {
-                String data = result.getString("id");
-                DocumentReference docRef = db.collection("novel").document(data);
-                docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        novel.setId(data);
-                        bundle.putString("id", novel.getId());
-                        mHeader.setText(data);
-                        mSubTitle.setText(novel.getIntro());
-                        mStorageReference = storage.getReference(novel.getImage());
-                        try {
-                            final File localFile = File.createTempFile("temp1","jpg");
-                            mStorageReference.getFile(localFile)
-                                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                        @Override
-                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                                            Glide.with(mImage.getContext())
-                                                    .load(bitmap)
-                                                    .centerCrop()
-                                                    .into(mImage);
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.d("Ttan", "onFailure: ", e);
-                                        }
-                                    });
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(requireContext(), "Load truyện thất bại", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        sharedViewModel.getData().observe(requireActivity(),v->{
+            novel.setId(sharedViewModel.getData().getValue());
+            if(novel.getId() == null) {
+                novel.setId("7RijD0lXUf6zZUHsTqJW");
             }
+            bundle.putString("id", novel.getId());
+            DocumentReference docRef = db.collection("novel").document(novel.getId());
+            docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    String id = documentSnapshot.getId();
+                    String gioiThieu = documentSnapshot.get("intro", String.class);
+                    String image = documentSnapshot.get("image", String.class);
+                    String name = documentSnapshot.get("name", String.class);
+                    Boolean status = documentSnapshot.get("status", Boolean.class);
+                    mHeader.setText(name);
+                    mSubTitle.setText(gioiThieu);
+                    mStorageReference = storage.getReference(image);
+                    try {
+                        final File localFile = File.createTempFile("temp1","jpg");
+                        mStorageReference.getFile(localFile)
+                                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                        Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                        Glide.with(mImage.getContext())
+                                                .load(bitmap)
+                                                .centerCrop()
+                                                .into(mImage);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d("Ttan", "onFailure: ", e);
+                                    }
+                                });
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+
+
+
+
         });
-
-
 
 //        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 //        sharedViewModel.getSelectedItem().observe(getViewLifecycleOwner(),item->{

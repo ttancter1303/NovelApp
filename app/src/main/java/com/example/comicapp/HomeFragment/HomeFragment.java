@@ -63,13 +63,6 @@ public class HomeFragment extends Fragment {
         mRecyclerViewReadHighest.setAdapter(mAllNovelAdapter);
         mRecyclerViewReadHighest.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
 
-//        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
-//        sharedViewModel.getSelectedItem().observe(getViewLifecycleOwner(),item->{
-//
-//        });
-        //viewmodel share dữ liệu
-
-
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
 
         mModel = new ViewModelProvider(this).get(ItemClickAllNovelViewModel.class);
@@ -113,11 +106,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view, Novel novel) {
                 sharedViewModel.setData(novel.getId());
-                novel.getId();
-                Bundle bundle = new Bundle();
-                bundle.putString("id",novel.getId());
-                getParentFragmentManager().setFragmentResult("idFromHome",bundle);
-
 
 //                mController.navigate(R.id.comicDetailFragment,bundle);
 

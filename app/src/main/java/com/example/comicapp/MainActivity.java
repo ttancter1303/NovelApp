@@ -2,6 +2,7 @@ package com.example.comicapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 
+import com.example.comicapp.Repository.ViewModel.SharedViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
-public class MainActivity extends AppCompatActivity implements SendData {
+public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_PHOTO_PICKER_SINGLE_SELECT = 22;
     private ViewPager2 viewPager2;
     private TabLayout tabLayout;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements SendData {
     FirebaseAuth mFirebaseAuth;
     private static final int PICK_IMAGE_REQUEST = 22;
     private String StringPath;
+    SharedViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements SendData {
 
         navHostFragment.getNavController().setGraph(navGraph);
         NavController navController = navHostFragment.getNavController();
-
+        viewModel = new ViewModelProvider(this).get(SharedViewModel.class);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.action_history:
@@ -88,13 +91,12 @@ public class MainActivity extends AppCompatActivity implements SendData {
             // Handle error
             return;
         }
-
         switch(requestCode) {
             case REQUEST_PHOTO_PICKER_SINGLE_SELECT:
                 // Get photo picker response for single select.
                 currentUri = data.getData();
                 //you got image path, now you may use this
-                StringPath = currentUri.toString();
+                viewModel.setData(currentUri);
                 Log.d("Ttan", "onActivityResult: "+StringPath);
                 return;
         }
@@ -105,12 +107,5 @@ public class MainActivity extends AppCompatActivity implements SendData {
     protected void onResume() {
         super.onResume();
 
-    }
-    public String getData(){
-        return StringPath;
-    }
-    @Override
-    public void sendData(String stringPath) {
-        stringPath = StringPath;
     }
 }

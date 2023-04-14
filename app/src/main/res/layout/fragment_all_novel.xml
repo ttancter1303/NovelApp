@@ -39,6 +39,5 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/notoserifkhojki"
         android:text="Slime 300"
-        android:textColor="@color/dark_grey"
         android:textSize="14sp" />
 </LinearLayout>
