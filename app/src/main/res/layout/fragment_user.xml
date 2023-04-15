@@ -28,14 +28,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
+                android:scaleType="centerCrop"
                 app:cardCornerRadius="50dp">
-
                 <ImageView
                     android:id="@+id/img_user"
                     android:layout_width="150dp"
-
-                    android:layout_height="150dp"
-                    android:src="@drawable/slime300" />
+                    android:layout_height="150dp" />
             </androidx.cardview.widget.CardView>
 
 

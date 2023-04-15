@@ -84,6 +84,10 @@ public class ChangeProfileFragment extends Fragment {
     Uri imageUri;
     SharedViewModel viewModel;
     private static SendData sendData;
+
+    Bitmap bitmap;
+    private boolean isCheck=false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,7 +112,7 @@ public class ChangeProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.CANADA);
         Date now = new Date();
-        fileName = formatter.format(now)+"jpg";
+        fileName = formatter.format(now)+".jpg";
         mBtnAccept = binding.btnSaveChageProfile;
         mBtnAccept.setOnClickListener(v->{
             Toast.makeText(requireContext(), "Thay đổi thành công", Toast.LENGTH_SHORT).show();
@@ -131,8 +135,6 @@ public class ChangeProfileFragment extends Fragment {
                 SelectImage();
             }
         });
-
-
         NavController navController = Navigation.findNavController(requireActivity(), R.id.fragment_host_container);
         mUserEmail.setText(mFirebaseUser.getEmail());
         String user = mFirebaseAuth.getUid();
@@ -150,7 +152,6 @@ public class ChangeProfileFragment extends Fragment {
                         mUserPhone.setText(document.get("phone").toString());
                         mUserNote.setText(document.get("note").toString());
                         image = document.get("image").toString();
-                        viewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
                         storageRef = storage.getReference(image);
                         try {
                             final File localFile = File.createTempFile("temp1","jpg");
@@ -158,11 +159,12 @@ public class ChangeProfileFragment extends Fragment {
                                     .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                                         @Override
                                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                            Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                            bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                                             Glide.with(imgUser.getContext())
                                                     .load(bitmap)
                                                     .centerCrop()
                                                     .into(imgUser);
+
                                         }
                                     }).addOnFailureListener(new OnFailureListener() {
                                         @Override
@@ -193,21 +195,20 @@ public class ChangeProfileFragment extends Fragment {
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent,100);
+
     }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == 100 && data != null && data.getData() != null){
-
             imageUri = data.getData();
+            if (imageUri != null){
+                isCheck = true;
+            }
             imgUser.setImageURI(imageUri);
-
-
         }
     }
     private void uploadImage() {
-
         progressDialog = new ProgressDialog(requireActivity());
         progressDialog.setTitle("Uploading File....");
         progressDialog.show();
@@ -236,7 +237,10 @@ public class ChangeProfileFragment extends Fragment {
     }
 
     public void changeUserFromDBV2(String Email,String Name,String Birth, String Phone, String Note,String user,String Image){
-        uploadImage();
+        if(isCheck){
+            uploadImage();
+        }
+
         Map<String,Object> dataMap = new HashMap<>();
         dataMap.put("email",Email);
         dataMap.put("name",Name);

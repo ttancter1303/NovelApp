@@ -76,7 +76,6 @@ public class UserFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         txtChangeProfile = binding.txtChangeProfile;
         txtChangePassword = binding.txtChangePassword;
         txtLogout = binding.txtLogout;
@@ -84,6 +83,31 @@ public class UserFragment extends Fragment {
         txtStatus = binding.userStatus;
         imgUser = binding.imgUser;
 
+
+        NavController navController = Navigation.findNavController(requireActivity(),R.id.fragment_host_container);
+        txtChangeProfile.setOnClickListener(v->{
+            navController.navigate(R.id.changeProfileFragment);
+        });
+//        txtSetting.setOnClickListener(v->{
+//            navController.popBackStack();
+//            navController.navigate(R.id.action_userFragment_to_settingFragment);
+////            navController.navigate(R.id.settingsFragment);
+//        });
+        txtChangePassword.setOnClickListener(v->{
+            navController.navigate(R.id.action_userFragment_to_forgotPasswordFragment);
+        });
+        txtLogout.setOnClickListener(v->{
+            mFirebaseAuth.signOut();
+            startActivity(new Intent(requireContext(), LoginActivity.class));
+            requireActivity().finish();
+        });
+
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         String user = mFirebaseAuth.getUid();
         DocumentReference docRef = db.collection("user").document(user);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -127,25 +151,5 @@ public class UserFragment extends Fragment {
                 }
             }
         });
-
-        NavController navController = Navigation.findNavController(requireActivity(),R.id.fragment_host_container);
-        txtChangeProfile.setOnClickListener(v->{
-            navController.navigate(R.id.changeProfileFragment);
-        });
-//        txtSetting.setOnClickListener(v->{
-//            navController.popBackStack();
-//            navController.navigate(R.id.action_userFragment_to_settingFragment);
-////            navController.navigate(R.id.settingsFragment);
-//        });
-        txtChangePassword.setOnClickListener(v->{
-            navController.navigate(R.id.action_userFragment_to_forgotPasswordFragment);
-        });
-        txtLogout.setOnClickListener(v->{
-            mFirebaseAuth.signOut();
-            startActivity(new Intent(requireContext(), LoginActivity.class));
-            requireActivity().finish();
-        });
-
-
     }
 }

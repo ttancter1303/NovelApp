@@ -16,12 +16,24 @@
         android:textSize="35sp"
         android:gravity="center_horizontal"
         />
-    <ImageView
-        android:layout_width="100dp"
-        android:id="@+id/img_user"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:layout_height="100dp"/>
+        android:layout_margin="10dp"
+        android:scaleType="centerCrop"
+        app:cardCornerRadius="50dp">
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:id="@+id/img_user"
+            android:layout_gravity="center"
+
+            />
+    </androidx.cardview.widget.CardView>
+
 
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="wrap_content"

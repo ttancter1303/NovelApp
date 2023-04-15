@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class SharedViewModel extends ViewModel {
-    private MutableLiveData<String> stringID = new MutableLiveData<>();
+    private MutableLiveData<String> stringID = new MutableLiveData<>("7RijD0lXUf6zZUHsTqJW");
     private MutableLiveData<Uri> uriMutableLiveData = new MutableLiveData<>();
 
     public void setData(Uri item){
